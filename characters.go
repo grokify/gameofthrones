@@ -14,7 +14,7 @@ import (
 
 const (
 	PackagePath    = "github.com/grokify/gameofthrones"
-	CharactersFile = "characters.tsv"
+	CharactersFile = "characters.csv"
 )
 
 type Character struct {

@@ -22,6 +22,7 @@ func main() {
 		panic(err)
 	}
 
+	// Add fictitious phone numbers to GOT characters
 	a2g := phonenumber.NewAreaCodeToGeo()
 	a2g.ReadData()
 	fng := phonenumber.NewFakeNumberGenerator(a2g.AreaCodes())

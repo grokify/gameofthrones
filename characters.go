@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/grokify/gotilla/encoding/csvutil"
 
@@ -56,6 +57,20 @@ func ReadCharactersPath(filepath string) ([]Character, error) {
 		if len(rec) >= 3 {
 			char.Character.NickName = rec[3]
 		}
+
+		parts := []string{}
+		if len(char.Character.Name.GivenName) > 0 {
+			parts = append(parts, char.Character.Name.GivenName)
+		}
+		if len(char.Character.NickName) > 0 {
+			parts = append(parts, fmt.Sprintf("\"%v\"", char.Character.NickName))
+		}
+		if len(char.Character.Name.FamilyName) > 0 {
+			parts = append(parts, char.Character.Name.FamilyName)
+		}
+
+		char.Character.DisplayName = strings.Join(parts, " ")
+
 		chars = append(chars, char)
 	}
 	file.Close()

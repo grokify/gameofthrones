@@ -76,6 +76,14 @@ func (pc *PipedriveClient) CreatePerson(reqBody RequestBody) (*http.Response, er
 	return pc.ClientMore.PostToJSON(apiUrl, reqBody)
 }
 
+func (pc *PipedriveClient) CreateOrIgnorePerson(reqBody RequestBody) (*http.Response, error) {
+	apiUrl, err := pc.BuildURL("/persons")
+	if err != nil {
+		return &http.Response{}, err
+	}
+	return pc.ClientMore.PostToJSON(apiUrl, reqBody)
+}
+
 func main() {
 	config.LoadDotEnv()
 
@@ -89,7 +97,7 @@ func main() {
 		httputilmore.PrintResponse(resp, true)
 	}
 
-	if 1 == 1 {
+	if 1 == 0 {
 		resp, err := pc.GetOrganizationFields()
 		if err != nil {
 			panic(err)
@@ -110,7 +118,7 @@ func main() {
 		}
 	}
 
-	if 1 == 0 {
+	if 1 == 1 {
 		chars, err := gameofthrones.ReadCharacters()
 		if err != nil {
 			panic(err)

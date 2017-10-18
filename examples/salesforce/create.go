@@ -2,15 +2,18 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/net/httputilmore"
-	ou "github.com/grokify/oauth2util-go"
 	"github.com/grokify/oauth2util-go/services/salesforce"
 )
+
+// SObject Reference
+// https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_list.htm
+// Field Types
+// https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/field_types.htm
 
 type Type struct {
 	Type        string `json:"type,omitempty"`
@@ -54,33 +57,40 @@ func GetAccounts() CreateAccountsRequest {
 }
 
 type Contact struct {
-	FirstName string
-	LastName  string
+	FirstName string `json:",omitempty"`
+	LastName  string `json:",omitempty"`
+	Name      string `json:",omitempty"`
+	Email     string `json:",omitempty"`
+	Phone     string `json:",omitempty"`
 }
 
-func LoadCharacters(cm httputilmore.ClientMore, urlBuilder salesforce.URLBuilder) {
+func LoadCharacters(sc salesforce.SalesforceClient, urlBuilder salesforce.URLBuilder) {
 	//https://developer.salesforce.com/forums/?id=906F0000000ApxUIAS
-	chars, err := gameofthrones.ReadCharacters()
+
+	chars, err := gameofthrones.ReadCharactersJSON()
 	if err != nil {
 		panic(err)
 	}
-	fmtutil.PrintJSON(chars)
-
-	apiURL := urlBuilder.Build("/services/data/v40.0/sobjects/Contact/")
 
 	for _, char := range chars {
 		contact := Contact{
 			FirstName: char.Character.Name.GivenName,
-			LastName:  char.Character.Name.FamilyName}
-		resp, err := cm.PostToJSON(apiURL.String(), contact)
+			LastName:  char.Character.Name.FamilyName,
+			//	Name:      char.Character.DisplayName,
+			Email: char.Character.Emails[0].Value,
+			Phone: char.Character.PhoneNumbers[0].Value}
+		fmtutil.PrintJSON(char)
+		fmtutil.PrintJSON(contact)
+		//panic("B")
+		resp, err := sc.CreateContact(contact) //cm.PostToJSON(apiURL.String(), contact)
 		if err != nil {
 			panic(err)
 		}
 		fmt.Printf("%v\n", resp.StatusCode)
 		httputilmore.PrintResponse(resp, true)
+		//panic("C")
 		//break
 	}
-	fmt.Println(apiURL)
 }
 
 func main() {
@@ -88,47 +98,36 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	client, err := salesforce.NewClientPassword(
-		ou.ApplicationCredentials{
-			ClientID:     os.Getenv("SALESFORCE_CLIENT_ID"),
-			ClientSecret: os.Getenv("SALESFORCE_CLIENT_SECRET")},
-		ou.UserCredentials{
-			Username: os.Getenv("SALESFORCE_USERNAME"),
-			Password: fmt.Sprintf("%v%v",
-				os.Getenv("SALESFORCE_PASSWORD"),
-				os.Getenv("SALESFORCE_SECURITY_KEY"))})
-
+	_, err = salesforce.NewClientPasswordSalesforceEnv()
 	if err != nil {
 		panic(err)
 	}
 
-	urlBuilder := salesforce.NewURLBuilder(os.Getenv("SALESFORCE_INSTANCE_NAME"))
+	sc, err := salesforce.NewSalesforceClientEnv()
+	if err != nil {
+		panic(err)
+	}
 
-	apiURL := urlBuilder.Build("services/data")
-
-	resp, err := client.Get(apiURL.String())
+	resp, err := sc.GetServicesData()
 	if err != nil {
 		panic(err)
 	}
 
 	httputilmore.PrintResponse(resp, true)
 
-	cm := httputilmore.ClientMore{Client: client}
-
-	if 1 == 1 {
+	if 1 == 0 {
 		acts := GetAccounts()
 
-		apiURL = urlBuilder.Build("services/data/v34.0/composite/tree/Account/")
+		apiURL := sc.URLBuilder.Build("services/data/v34.0/composite/tree/Account/")
 		fmt.Println(apiURL)
 
-		resp, err = cm.PostToJSON(apiURL.String(), acts)
+		resp, err = sc.ClientMore.PostToJSON(apiURL.String(), acts)
 
 		fmt.Printf("%v\n", resp.StatusCode)
 		httputilmore.PrintResponse(resp, true)
 	}
-	if 1 == 0 {
-		LoadCharacters(cm, urlBuilder)
+	if 1 == 1 {
+		LoadCharacters(sc, sc.URLBuilder)
 	}
 	fmt.Println("DONE")
 }

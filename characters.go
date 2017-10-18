@@ -1,9 +1,11 @@
 package gameofthrones
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -14,8 +16,9 @@ import (
 )
 
 const (
-	PackagePath    = "github.com/grokify/gameofthrones"
-	CharactersFile = "characters.csv"
+	PackagePath            = "github.com/grokify/gameofthrones"
+	CharactersFileCSV      = "characters.csv"
+	CharactersFilepathJSON = "examples/build_data/characters_out_email.json"
 )
 
 type Character struct {
@@ -23,11 +26,39 @@ type Character struct {
 	Character scimutil.User `json:"character,omitempty"`
 }
 
-func ReadCharacters() ([]Character, error) {
-	return ReadCharactersPath(GetCharacterPath())
+func ReadCharactersJSON(filepaths ...string) ([]Character, error) {
+	switch len(filepaths) {
+	case 0:
+		return ReadCharactersPathJSON(GetPackagePath(CharactersFilepathJSON))
+	case 1:
+		return ReadCharactersPathJSON(filepaths[0])
+	default:
+		return []Character{}, errors.New("Too many file paths, only 0 or 1 allowed.")
+	}
 }
 
-func ReadCharactersPath(filepath string) ([]Character, error) {
+func ReadCharactersPathJSON(filepath string) ([]Character, error) {
+	chars := []Character{}
+	bytes, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		return chars, err
+	}
+	err = json.Unmarshal(bytes, &chars)
+	return chars, err
+}
+
+func ReadCharactersCSV(filepaths ...string) ([]Character, error) {
+	switch len(filepaths) {
+	case 0:
+		return ReadCharactersPathCSV(GetCharacterPathCSV())
+	case 1:
+		return ReadCharactersPathCSV(filepaths[0])
+	default:
+		return []Character{}, errors.New("Too many file paths, only 0 or 1 allowed.")
+	}
+}
+
+func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 	chars := []Character{}
 	csv, file, err := csvutil.NewReader(filepath, ',', false)
 	if err != nil {
@@ -80,6 +111,10 @@ func ReadCharactersPath(filepath string) ([]Character, error) {
 	return chars, nil
 }
 
-func GetCharacterPath() string {
-	return path.Join(os.Getenv("GOPATH"), "src", PackagePath, CharactersFile)
+func GetCharacterPathCSV() string {
+	return path.Join(os.Getenv("GOPATH"), "src", PackagePath, CharactersFileCSV)
+}
+
+func GetPackagePath(pathPart string) string {
+	return path.Join(os.Getenv("GOPATH"), "src", PackagePath, pathPart)
 }

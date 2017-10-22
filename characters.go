@@ -18,12 +18,17 @@ import (
 const (
 	PackagePath            = "github.com/grokify/gameofthrones"
 	CharactersFileCSV      = "characters.csv"
-	CharactersFilepathJSON = "examples/build_data/characters_out_email.json"
+	CharactersFilepathJSON = "examples/build_data/characters_out_inflated.json"
 )
 
 type Character struct {
-	Actor     scimutil.User `json:"actor,omitempty"`
-	Character scimutil.User `json:"character,omitempty"`
+	Actor        scimutil.User `json:"actor,omitempty"`
+	Character    scimutil.User `json:"character,omitempty"`
+	Organization Organization  `json:"organization,omitempty"`
+}
+
+func (char *Character) Inflate() {
+	char.Organization = GetOrganizationForUser(char.Character)
 }
 
 func ReadCharactersJSON(filepaths ...string) ([]Character, error) {

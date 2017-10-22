@@ -1,13 +1,18 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"path"
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/net/httputilmore"
 	"github.com/grokify/oauth2util-go/services/salesforce"
+	"github.com/ttacon/libphonenumber"
 )
 
 // SObject Reference
@@ -64,46 +69,63 @@ type Contact struct {
 	Phone     string `json:",omitempty"`
 }
 
-func LoadCharacters(sc salesforce.SalesforceClient, urlBuilder salesforce.URLBuilder) {
+func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Character) {
 	//https://developer.salesforce.com/forums/?id=906F0000000ApxUIAS
 
-	chars, err := gameofthrones.ReadCharactersJSON()
-	if err != nil {
-		panic(err)
-	}
-
 	for _, char := range chars {
+		e164 := char.Character.PhoneNumbers[0].Value
+
+		num, err := libphonenumber.Parse(e164, "US")
+		formattedNum := libphonenumber.Format(num, libphonenumber.NATIONAL)
+		if err != nil {
+			panic(err)
+		}
+
 		contact := Contact{
 			FirstName: char.Character.Name.GivenName,
 			LastName:  char.Character.Name.FamilyName,
-			//	Name:      char.Character.DisplayName,
-			Email: char.Character.Emails[0].Value,
-			Phone: char.Character.PhoneNumbers[0].Value}
+			Email:     char.Character.Emails[0].Value,
+			Phone:     formattedNum}
 		fmtutil.PrintJSON(char)
 		fmtutil.PrintJSON(contact)
-		//panic("B")
+
 		resp, err := sc.CreateContact(contact) //cm.PostToJSON(apiURL.String(), contact)
 		if err != nil {
 			panic(err)
 		}
 		fmt.Printf("%v\n", resp.StatusCode)
 		httputilmore.PrintResponse(resp, true)
-		//panic("C")
-		//break
 	}
 }
 
-func main() {
+func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 	err := config.LoadDotEnv()
 	if err != nil {
-		panic(err)
+		return salesforce.SalesforceClient{}, err
 	}
 	_, err = salesforce.NewClientPasswordSalesforceEnv()
 	if err != nil {
-		panic(err)
+		return salesforce.SalesforceClient{}, err
 	}
+	return salesforce.NewSalesforceClientEnv()
+}
 
-	sc, err := salesforce.NewSalesforceClientEnv()
+func GetCharsJSONInflated() ([]gameofthrones.Character, error) {
+	return gameofthrones.ReadCharactersJSON()
+
+	filepath := "github.com/grokify/gameofthrones/examples/build_data/characters_out_inflated.json"
+	filepath = path.Join(os.Getenv("GOPATH"), "src", filepath)
+	bytes, err := ioutil.ReadFile(filepath)
+	chars := []gameofthrones.Character{}
+	if err != nil {
+		return chars, err
+	}
+	err = json.Unmarshal(bytes, &chars)
+	return chars, err
+}
+
+func main() {
+	sc, err := NewSalesforceClientEnv()
 	if err != nil {
 		panic(err)
 	}
@@ -126,8 +148,16 @@ func main() {
 		fmt.Printf("%v\n", resp.StatusCode)
 		httputilmore.PrintResponse(resp, true)
 	}
+	if 1 == 0 {
+		sc.DeleteContactsAll()
+	}
 	if 1 == 1 {
-		LoadCharacters(sc, sc.URLBuilder)
+		chars, err := GetCharsJSONInflated()
+		if err != nil {
+			panic(err)
+		}
+
+		LoadCharacters(sc, chars)
 	}
 	fmt.Println("DONE")
 }

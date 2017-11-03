@@ -10,6 +10,20 @@ The data should be created in this order:
 
 ## Instructions
 
+### Create your app credentials
+
+Create a Connected App in Salesforce and add your credentials to your `.env` file. The location of this can be specified in the `ENV_PATH` environment variable.
+
+```
+SALESFORCE_CLIENT_ID=myClientId
+SALESFORCE_CLIENT_SECRET=myClientSecret
+SALESFORCE_USERNAME=myUsername
+SALESFORCE_PASSWORD=myPassword
+SALESFORCE_SECURITY_KEY=mySecurityKey
+```
+
+### Run the code
+
 ```bash
 $ go get github.com/grokify/gameofthrones
 $ cd $GOPATH/src/github/grokify/gameofthrones/examples/salesforce

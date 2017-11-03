@@ -6,5 +6,5 @@ It also has the ability to generate test data for software demos including ficti
 
 This is available for:
 
-* Salesforce: [examples/salesforce/]
-* Pipedrive: [examples/pipedrive/]
+* Salesforce: [examples/salesforce](examples/salesforce)
+* Pipedrive: [examples/pipedrive](examples/pipedrive)

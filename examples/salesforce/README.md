@@ -44,6 +44,8 @@ The following are valid actions:
 
 ![](salesforce_demo_accounts.png "")
 
+![](salesforce_demo_account.png "")
+
 ### Contacts
 
 ![](salesforce_demo_contacts.png "")

@@ -10,7 +10,7 @@ The data should be created in this order:
 
 ## Instructions
 
-### Create your app credentials
+### Create your app
 
 Create a Connected App in Salesforce and add your credentials to your `.env` file. The location of this can be specified in the `ENV_PATH` environment variable.
 

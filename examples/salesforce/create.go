@@ -241,7 +241,6 @@ func main() {
 	switch action {
 	case "create_accounts":
 		acts := GetAccounts()
-		fmtutil.PrintJSON(acts)
 
 		apiURL := sc.URLBuilder.Build("services/data/v41.0/composite/tree/Account/")
 
@@ -265,29 +264,5 @@ func main() {
 	case "create_cases":
 		CreateCases(sc)
 	}
-	/*
-				CreateCases(sc)
-		if deleteAccounts {
-			err := sc.DeleteAccountsAll()
-			if err != nil {
-				panic(err)
-			}
-		if deleteContacts {
-			sc.DeleteContactsAll()
-		}
-		if createContacts {
-			chars, err := gameofthrones.GetDemoCharacters()
-			if err != nil {
-				panic(err)
-			}
-
-			fmtutil.PrintJSON(chars)
-
-			LoadCharacters(sc, chars.CharactersSorted(), GetSfAccounts(sc))
-		}
-		if createCases {
-			CreateCases(sc)
-		}
-	*/
 	fmt.Println("DONE")
 }

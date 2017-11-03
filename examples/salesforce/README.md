@@ -22,6 +22,8 @@ SALESFORCE_SECURITY_KEY=mySecurityKey
 $ go get github.com/grokify/gameofthrones
 $ cd $GOPATH/src/github/grokify/gameofthrones/examples/salesforce
 $ go run create.go -action create_accounts
+$ go run create.go -action create_contacts
+$ go run create.go -action create_cases
 ```
 
 The following are valid actions:

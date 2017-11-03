@@ -44,16 +44,22 @@ The following are valid actions:
 
 ![](salesforce_demo_accounts.png "")
 
+### Account
+
 ![](salesforce_demo_account.png "")
 
 ### Contacts
 
 ![](salesforce_demo_contacts.png "")
 
+### Contact
+
 ![](salesforce_demo_contact.png "")
 
 ### Cases
 
 ![](salesforce_demo_cases.png "")
+
+### Case
 
 ![](salesforce_demo_case.png "")

@@ -2,12 +2,6 @@
 
 This code creates Saleforce demo data using Game of Thrones data. It augments the data with ficticious phone numbers, email addresses and websites.
 
-The data should be created in this order:
-
-1. Accounts
-2. Contacts
-3. Cases
-
 ## Instructions
 
 ### Create your app
@@ -37,6 +31,12 @@ The following are valid actions:
 * `create_contacts`
 * `delete_contacts`
 * `create_cases`
+
+The data should be created in this order:
+
+1. Accounts
+2. Contacts
+3. Cases
 
 ## Screenshots
 

@@ -11,8 +11,7 @@ import (
 	"strings"
 
 	"github.com/grokify/gotilla/encoding/csvutil"
-
-	"github.com/grokify/oauth2util-go/scimutil"
+	"github.com/grokify/oauth2util/scimutil"
 )
 
 const (

@@ -27,18 +27,12 @@ func addPhoneNumbers(chars []gameofthrones.Character) []gameofthrones.Character 
 	a2g.ReadData()
 	fng := phonenumber.NewFakeNumberGenerator(a2g.AreaCodes())
 
-	set := map[int]int{}
-	num := 0
+	set := map[uint64]int8{}
+	num := uint64(0)
 	for i, char := range chars {
 		num, set = fng.RandomLocalNumberUSUnique(set)
 		e164 := fmt.Sprintf("+%d", num)
-		/*
-			num, err := libphonenumber.Parse(e164, "US")
-			formattedNum := libphonenumber.Format(num, libphonenumber.NATIONAL)
-			if err != nil {
-				panic(err)
-			}
-		*/
+
 		char.Character.PhoneNumbers = append(
 			char.Character.PhoneNumbers,
 			scimutil.Item{Value: e164})

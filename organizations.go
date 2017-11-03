@@ -1,11 +1,12 @@
 package gameofthrones
 
 import (
-	"github.com/grokify/oauth2util-go/scimutil"
+	"github.com/grokify/oauth2util/scimutil"
 )
 
 var Organizations = []string{
 	"Baelish Keep",
+	"Bear Island",
 	"Blackhaven",
 	"Braavos",
 	"Casterly Rock",
@@ -19,13 +20,14 @@ var Organizations = []string{
 	"House Clegane",
 	"Iron Islands",
 	"King's Landing",
+	"Lord of Light",
 	"Myr",
 	"Night's Watch",
+	"Order of Maesters",
 	"Second Sons",
 	"Tarth",
 	"The Crossroads",
 	"The Dreadfort",
-	"The Lord of Light",
 	"The Neck",
 	"The Riverlands",
 	"The Sparrows",
@@ -59,7 +61,7 @@ var FamilyNameToOrganization = map[string]string{
 	"Naharis":    "Second Sons",
 	"Payne":      "King's Landing",
 	"Pie":        "The Crossroads",
-	"Pycelle":    "King's Landing",
+	"Pycelle":    "Order of Maesters",
 	"Reed":       "Greywater Watch",
 	"Sam":        "Horn Hill",
 	"Sand":       "Dorne",

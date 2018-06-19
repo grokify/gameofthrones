@@ -7,7 +7,7 @@ import (
 
 	"github.com/grokify/gotilla/net/urlutil"
 	"github.com/grokify/gotilla/strconv/phonenumber"
-	"github.com/grokify/oauth2util/scimutil"
+	"github.com/grokify/oauth2more/scim"
 )
 
 type DemoCharacters struct {
@@ -86,14 +86,14 @@ func GetDemoCharacters() (DemoCharacters, error) {
 				email := fmt.Sprintf("%v@%v", slug, strings.TrimSpace(demoOrg.Domain))
 				char.Character.Emails = append(
 					char.Character.Emails,
-					scimutil.Item{Value: email})
+					scim.Item{Value: email})
 			}
 			if demoOrg.AreaCode > 0 {
 				num := aci.GetNext(demoOrg.AreaCode)
 				e164 := fmt.Sprintf("+%d", num)
 				char.Character.PhoneNumbers = append(
 					char.Character.PhoneNumbers,
-					scimutil.Item{Value: e164})
+					scim.Item{Value: e164})
 			} else {
 				num := uint64(0)
 				num, unique = fng.RandomLocalNumberUSUniqueAreaCodeSet(unique, acsOther)
@@ -101,14 +101,14 @@ func GetDemoCharacters() (DemoCharacters, error) {
 				e164 := fmt.Sprintf("+%d", num)
 				char.Character.PhoneNumbers = append(
 					char.Character.PhoneNumbers,
-					scimutil.Item{Value: e164})
+					scim.Item{Value: e164})
 			}
 		}
 		if len(char.Character.Emails) == 0 {
 			email := fmt.Sprintf("%v@westeros.com", slug)
 			char.Character.Emails = append(
 				char.Character.Emails,
-				scimutil.Item{Value: email})
+				scim.Item{Value: email})
 		}
 
 		demoChars.CharactersMap[char.Character.DisplayName] = char

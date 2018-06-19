@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/grokify/gotilla/encoding/csvutil"
-	"github.com/grokify/oauth2util/scimutil"
+	"github.com/grokify/oauth2more/scim"
 )
 
 const (
@@ -21,9 +21,9 @@ const (
 )
 
 type Character struct {
-	Actor        scimutil.User `json:"actor,omitempty"`
-	Character    scimutil.User `json:"character,omitempty"`
-	Organization Organization  `json:"organization,omitempty"`
+	Actor        scim.User    `json:"actor,omitempty"`
+	Character    scim.User    `json:"character,omitempty"`
+	Organization Organization `json:"organization,omitempty"`
 }
 
 func (char *Character) Inflate() {
@@ -81,8 +81,8 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 			break
 		}
 		char := Character{
-			Actor:     scimutil.User{DisplayName: rec[0]},
-			Character: scimutil.User{Name: scimutil.Name{}}}
+			Actor:     scim.User{DisplayName: rec[0]},
+			Character: scim.User{Name: scim.Name{}}}
 		if len(rec) >= 2 {
 			char.Character.Name.GivenName = rec[1]
 		}

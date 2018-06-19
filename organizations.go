@@ -1,7 +1,7 @@
 package gameofthrones
 
 import (
-	"github.com/grokify/oauth2util/scimutil"
+	"github.com/grokify/oauth2more/scim"
 )
 
 var Organizations = []string{
@@ -92,7 +92,7 @@ type Thing struct {
 	Name string `json:"name,omitempty"`
 }
 
-func GetOrganizationForUser(user scimutil.User) Organization {
+func GetOrganizationForUser(user scim.User) Organization {
 	familyName := user.Name.FamilyName
 	org := Organization{Thing: Thing{}}
 	if orgName, ok := FamilyNameToOrganization[familyName]; ok {

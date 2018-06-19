@@ -11,7 +11,7 @@ import (
 	"github.com/grokify/gotilla/io/ioutilmore"
 	"github.com/grokify/gotilla/net/urlutil"
 	"github.com/grokify/gotilla/strconv/phonenumber"
-	"github.com/grokify/oauth2util-go/scimutil"
+	"github.com/grokify/oauth2more/scim"
 )
 
 type Person struct {
@@ -35,7 +35,7 @@ func addPhoneNumbers(chars []gameofthrones.Character) []gameofthrones.Character 
 
 		char.Character.PhoneNumbers = append(
 			char.Character.PhoneNumbers,
-			scimutil.Item{Value: e164})
+			scim.Item{Value: e164})
 
 		chars[i] = char
 	}
@@ -49,10 +49,40 @@ func addEmail(chars []gameofthrones.Character) []gameofthrones.Character {
 		email := fmt.Sprintf("%v@example.com", charSlug)
 		char.Character.Emails = append(
 			char.Character.Emails,
-			scimutil.Item{Value: email})
+			scim.Item{Value: email})
 		chars[i] = char
 	}
 	return chars
+}
+
+type RcEvContact struct {
+	Id           string            `json:"id,omitempty"`
+	Name         string            `json:"name,omitempty"`
+	Type         string            `json:"type,omitempty"`
+	PhoneNumbers []RcEvPhoneNumber `json:"phoneNumbers,omitempty"`
+}
+
+type RcEvPhoneNumber struct {
+	PhoneNumber string `json:"phoneNumber,omitempty"`
+	PhoneType   string `json:"phoneType,omitempty"`
+}
+
+func ToRingCentral(chars []gameofthrones.Character) []RcEvContact {
+	rcChars := []RcEvContact{}
+	for _, char := range chars {
+		rcChars = append(rcChars, RcEvContact{
+			Id:   char.Character.PhoneNumbers[0].Value,
+			Name: char.Character.DisplayName,
+			Type: "Game of Thrones",
+			PhoneNumbers: []RcEvPhoneNumber{
+				{
+					PhoneNumber: char.Character.PhoneNumbers[0].Value,
+					PhoneType:   "directPhone",
+				},
+			},
+		})
+	}
+	return rcChars
 }
 
 func main() {
@@ -84,6 +114,12 @@ func main() {
 		chars[i] = char
 	}
 	outfile := "characters_out_inflated.json"
-	ioutilmore.WriteJSON(outfile, chars, 644, true)
+	ioutilmore.WriteJSON(outfile, chars, 0644, true)
+
+	outfile2 := "characters_out_rcev.json"
+	ioutilmore.WriteJSON(outfile2, ToRingCentral(chars), 0644, true)
+	outfile3 := "characters_out_rcev2.json"
+	ioutilmore.WriteJSON(outfile3, ToRingCentral(chars), 0644, false)
+
 	//fmt.Println("DONE")
 }

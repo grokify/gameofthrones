@@ -14,7 +14,8 @@ import (
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/net/httputilmore"
-	"github.com/grokify/oauth2util/salesforce"
+	om "github.com/grokify/oauth2more"
+	"github.com/grokify/oauth2more/salesforce"
 	"github.com/ttacon/libphonenumber"
 )
 
@@ -124,15 +125,31 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 }
 
 func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
-	err := config.LoadDotEnv()
+	err := config.LoadDotEnvSkipEmpty(os.Getenv("ENV_PATH"), "./.env")
 	if err != nil {
 		return salesforce.SalesforceClient{}, err
 	}
-	_, err = salesforce.NewClientPasswordSalesforceEnv()
-	if err != nil {
-		return salesforce.SalesforceClient{}, err
+
+	appCreds := salesforce.ApplicationCredentials{
+		ApplicationCredentials: om.ApplicationCredentials{
+			ClientID:     os.Getenv("SALESFORCE_CLIENT_ID"),
+			ClientSecret: os.Getenv("SALESFORCE_CLIENT_SECRET"),
+			Endpoint:     salesforce.Endpoint,
+		},
+		InstanceName: os.Getenv("SALESFORCE_INSTANCE_NAME"),
 	}
-	return salesforce.NewSalesforceClientEnv()
+
+	usrCreds := om.UserCredentials{
+		Username: os.Getenv("SALESFORCE_USERNAME"),
+		Password: strings.Join([]string{
+			os.Getenv("SALESFORCE_PASSWORD"),
+			os.Getenv("SALESFORCE_SECURITY_TOKEN"),
+		}, ""),
+	}
+
+	fmtutil.PrintJSON(appCreds)
+	fmtutil.PrintJSON(usrCreds)
+	return salesforce.NewSalesforceClientPassword(appCreds, usrCreds)
 }
 
 func GetCharsJSONInflated() ([]gameofthrones.Character, error) {

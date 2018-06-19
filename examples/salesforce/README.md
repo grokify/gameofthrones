@@ -16,6 +16,10 @@ SALESFORCE_PASSWORD=myPassword
 SALESFORCE_SECURITY_KEY=mySecurityKey
 ```
 
+* `SALESFORCE_CLIENT_ID` and `SALESFORCE_CLIENT_SECRET` are created for you when you create a "Connected App" under `Setup` > `Apps` > `App Manager` with OAuth Settings
+* `SALESFORCE_USERNAME` and `SALESFORCE_PASSWORD` are the same credentials as you use to login to https://login.salesforce.com
+* `SALESFORCE_SECURITY_KEY` is configured under your user `Settings` > `My Personal Information` > `Reset My Security Token`
+
 ### Run the code
 
 ```bash

@@ -10,8 +10,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/grokify/gotilla/encoding/csvutil"
 	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/simplego/encoding/csvutil"
 )
 
 const (
@@ -37,7 +37,7 @@ func ReadCharactersJSON(filepaths ...string) ([]Character, error) {
 	case 1:
 		return ReadCharactersPathJSON(filepaths[0])
 	default:
-		return []Character{}, errors.New("Too many file paths, only 0 or 1 allowed.")
+		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed.")
 	}
 }
 
@@ -58,13 +58,17 @@ func ReadCharactersCSV(filepaths ...string) ([]Character, error) {
 	case 1:
 		return ReadCharactersPathCSV(filepaths[0])
 	default:
-		return []Character{}, errors.New("Too many file paths, only 0 or 1 allowed.")
+		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed.")
 	}
+}
+
+func ReadCharacters() ([]Character, error) {
+	return ReadCharactersPathCSV(GetCharacterPathCSV())
 }
 
 func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 	chars := []Character{}
-	csv, file, err := csvutil.NewReader(filepath, ',', false)
+	csv, file, err := csvutil.NewReaderFile(filepath, ',')
 	if err != nil {
 		return chars, err
 	}
@@ -77,7 +81,7 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 			err = errx
 			break
 		} else if len(rec) < 2 {
-			err = errors.New(fmt.Sprintf("Bad Data: %v\n", rec))
+			err = errors.New(fmt.Sprintf("bad data: %v\n", rec))
 			break
 		}
 		char := Character{

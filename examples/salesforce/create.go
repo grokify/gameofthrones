@@ -11,11 +11,12 @@ import (
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/go-salesforce/sobjects"
-	"github.com/grokify/gotilla/config"
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/net/httputilmore"
 	om "github.com/grokify/oauth2more"
+	"github.com/grokify/oauth2more/credentials"
 	"github.com/grokify/oauth2more/salesforce"
+	"github.com/grokify/simplego/config"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/net/httputilmore"
 	"github.com/ttacon/libphonenumber"
 )
 
@@ -131,10 +132,10 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 	}
 
 	appCreds := salesforce.ApplicationCredentials{
-		ApplicationCredentials: om.ApplicationCredentials{
-			ClientID:     os.Getenv("SALESFORCE_CLIENT_ID"),
-			ClientSecret: os.Getenv("SALESFORCE_CLIENT_SECRET"),
-			Endpoint:     salesforce.Endpoint,
+		ApplicationCredentials: credentials.ApplicationCredentials{
+			ClientID:       os.Getenv("SALESFORCE_CLIENT_ID"),
+			ClientSecret:   os.Getenv("SALESFORCE_CLIENT_SECRET"),
+			OAuth2Endpoint: salesforce.Endpoint,
 		},
 		InstanceName: os.Getenv("SALESFORCE_INSTANCE_NAME"),
 	}

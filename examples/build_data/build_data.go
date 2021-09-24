@@ -7,11 +7,11 @@ import (
 	"io/ioutil"
 
 	"github.com/grokify/gameofthrones"
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/io/ioutilmore"
-	"github.com/grokify/gotilla/net/urlutil"
-	"github.com/grokify/gotilla/strconv/phonenumber"
 	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/io/ioutilmore"
+	"github.com/grokify/simplego/net/urlutil"
+	"github.com/grokify/simplego/strconv/phonenumber"
 )
 
 type Person struct {
@@ -57,6 +57,7 @@ func addEmail(chars []gameofthrones.Character) []gameofthrones.Character {
 
 type RcEvContact struct {
 	Id           string            `json:"id,omitempty"`
+	IdNum        int               `json:"_id,omitempty"`
 	Name         string            `json:"name,omitempty"`
 	Type         string            `json:"type,omitempty"`
 	PhoneNumbers []RcEvPhoneNumber `json:"phoneNumbers,omitempty"`
@@ -114,12 +115,25 @@ func main() {
 		chars[i] = char
 	}
 	outfile := "characters_out_inflated.json"
-	ioutilmore.WriteJSON(outfile, chars, 0644, true)
+	ioutilmore.WriteFileJSON(outfile, chars, 0644, "", "  ")
 
 	outfile2 := "characters_out_rcev.json"
-	ioutilmore.WriteJSON(outfile2, ToRingCentral(chars), 0644, true)
+	ioutilmore.WriteFileJSON(outfile2, ToRingCentral(chars), 0644, "", "  ")
 	outfile3 := "characters_out_rcev2.json"
-	ioutilmore.WriteJSON(outfile3, ToRingCentral(chars), 0644, false)
+	ioutilmore.WriteFileJSON(outfile3, ToRingCentral(chars), 0644, "", "")
+
+	rcChars := ToRingCentral(chars)
+	for i, c := range rcChars {
+		c.Id = ""
+		c.IdNum = i + 1
+		rcChars[i] = c
+	}
+	fmtutil.PrintJSON(rcChars)
+
+	outfile4 := "characters_out_rcev4.json"
+	ioutilmore.WriteFileJSON(outfile4, rcChars, 0644, "", "")
+
+	fmtutil.PrintJSONMore(rcChars, "", "")
 
 	//fmt.Println("DONE")
 }

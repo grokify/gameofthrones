@@ -5,9 +5,9 @@ import (
 
 	"github.com/grokify/gameofthrones"
 
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/sort/sortutil"
-	"github.com/grokify/gotilla/strconv/phonenumber"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/sort/sortutil"
+	"github.com/grokify/simplego/strconv/phonenumber"
 )
 
 func main() {
@@ -30,6 +30,6 @@ func main() {
 		fmt.Printf("%v %v %v\n", i, org, ac)
 	}
 
-	demoOrgs := gameofthrones.DemoOrganizations()
+	demoOrgs := gameofthrones.GetDemoOrganizations()
 	fmtutil.PrintJSON(demoOrgs)
 }

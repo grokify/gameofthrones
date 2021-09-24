@@ -3,9 +3,9 @@ package gameofthrones
 import (
 	"fmt"
 
-	"github.com/grokify/gotilla/net/urlutil"
-	"github.com/grokify/gotilla/sort/sortutil"
-	"github.com/grokify/gotilla/strconv/phonenumber"
+	"github.com/grokify/simplego/net/urlutil"
+	"github.com/grokify/simplego/sort/sortutil"
+	"github.com/grokify/simplego/strconv/phonenumber"
 )
 
 type DemoOrganization struct {

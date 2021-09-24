@@ -5,9 +5,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/grokify/gotilla/net/urlutil"
-	"github.com/grokify/gotilla/strconv/phonenumber"
 	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/simplego/net/urlutil"
+	"github.com/grokify/simplego/strconv/phonenumber"
 )
 
 type DemoCharacters struct {

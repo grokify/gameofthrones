@@ -5,9 +5,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/grokify/oauth2more/scim"
-	"github.com/grokify/simplego/net/urlutil"
-	"github.com/grokify/simplego/strconv/phonenumber"
+	"github.com/grokify/goauth/scim"
+	"github.com/grokify/gophonenumbers"
+	"github.com/grokify/mogo/net/urlutil"
+	"github.com/grokify/mogo/strconv/phonenumber"
 )
 
 type DemoCharacters struct {
@@ -41,9 +42,9 @@ func (dc *DemoCharacters) CharactersSorted() []Character {
 }
 
 func GetDemoCharacters() (DemoCharacters, error) {
-	a2g := phonenumber.NewAreaCodeToGeo()
+	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
-	fng := phonenumber.NewFakeNumberGenerator(a2g.AreaCodes())
+	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
 	unique := map[uint64]int8{}
 	acsOrgs := map[uint16]int8{}
 	acsOther := []uint16{}

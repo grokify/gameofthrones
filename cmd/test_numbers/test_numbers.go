@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/grokify/gameofthrones"
+	"github.com/grokify/gophonenumbers"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/sort/sortutil"
 
-	"github.com/grokify/simplego/fmt/fmtutil"
-	"github.com/grokify/simplego/sort/sortutil"
-	"github.com/grokify/simplego/strconv/phonenumber"
+	"github.com/grokify/gameofthrones"
 )
 
 func main() {
-	a2g := phonenumber.NewAreaCodeToGeo()
+	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
 	fmtutil.PrintJSON(a2g)
 

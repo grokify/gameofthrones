@@ -3,9 +3,10 @@ package gameofthrones
 import (
 	"fmt"
 
-	"github.com/grokify/simplego/net/urlutil"
-	"github.com/grokify/simplego/sort/sortutil"
-	"github.com/grokify/simplego/strconv/phonenumber"
+	"github.com/grokify/gophonenumbers"
+	"github.com/grokify/mogo/net/urlutil"
+	"github.com/grokify/mogo/sort/sortutil"
+	"github.com/grokify/mogo/strconv/phonenumber"
 )
 
 type DemoOrganization struct {
@@ -27,7 +28,7 @@ type DemoOrganizations struct {
 }
 
 func GetDemoOrganizations() DemoOrganizations {
-	a2g := phonenumber.NewAreaCodeToGeo()
+	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
 
 	acs := a2g.AreaCodes()

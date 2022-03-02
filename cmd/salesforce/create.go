@@ -11,12 +11,11 @@ import (
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/go-salesforce/sobjects"
-	om "github.com/grokify/oauth2more"
-	"github.com/grokify/oauth2more/credentials"
-	"github.com/grokify/oauth2more/salesforce"
-	"github.com/grokify/simplego/config"
-	"github.com/grokify/simplego/fmt/fmtutil"
-	"github.com/grokify/simplego/net/httputilmore"
+	"github.com/grokify/goauth/credentials"
+	"github.com/grokify/goauth/salesforce"
+	"github.com/grokify/mogo/config"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/ttacon/libphonenumber"
 )
 
@@ -131,26 +130,32 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 		return salesforce.SalesforceClient{}, err
 	}
 
-	appCreds := salesforce.ApplicationCredentials{
-		ApplicationCredentials: credentials.ApplicationCredentials{
-			ClientID:       os.Getenv("SALESFORCE_CLIENT_ID"),
-			ClientSecret:   os.Getenv("SALESFORCE_CLIENT_SECRET"),
-			OAuth2Endpoint: salesforce.Endpoint,
+	o2Creds := salesforce.OAuth2Credentials{
+		CredentialsOAuth2: credentials.CredentialsOAuth2{
+			Endpoint:     salesforce.Endpoint,
+			ClientID:     os.Getenv("SALESFORCE_CLIENT_ID"),
+			ClientSecret: os.Getenv("SALESFORCE_CLIENT_SECRET"),
+			Username:     os.Getenv("SALESFORCE_USERNAME"),
+			Password: strings.Join([]string{
+				os.Getenv("SALESFORCE_PASSWORD"),
+				os.Getenv("SALESFORCE_SECURITY_TOKEN"),
+			}, ""),
 		},
 		InstanceName: os.Getenv("SALESFORCE_INSTANCE_NAME"),
 	}
+	/*
+		usrCreds := goauth.UserCredentials{
+			Username: os.Getenv("SALESFORCE_USERNAME"),
+			Password: strings.Join([]string{
+				os.Getenv("SALESFORCE_PASSWORD"),
+				os.Getenv("SALESFORCE_SECURITY_TOKEN"),
+			}, ""),
+		}
+	*/
 
-	usrCreds := om.UserCredentials{
-		Username: os.Getenv("SALESFORCE_USERNAME"),
-		Password: strings.Join([]string{
-			os.Getenv("SALESFORCE_PASSWORD"),
-			os.Getenv("SALESFORCE_SECURITY_TOKEN"),
-		}, ""),
-	}
-
-	fmtutil.PrintJSON(appCreds)
-	fmtutil.PrintJSON(usrCreds)
-	return salesforce.NewSalesforceClientPassword(appCreds, usrCreds)
+	fmtutil.PrintJSON(o2Creds)
+	//fmtutil.PrintJSON(usrCreds)
+	return salesforce.NewSalesforceClientPassword(o2Creds)
 }
 
 func GetCharsJSONInflated() ([]gameofthrones.Character, error) {

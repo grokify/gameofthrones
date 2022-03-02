@@ -7,11 +7,11 @@ import (
 	"io/ioutil"
 
 	"github.com/grokify/gameofthrones"
-	"github.com/grokify/oauth2more/scim"
-	"github.com/grokify/simplego/fmt/fmtutil"
-	"github.com/grokify/simplego/io/ioutilmore"
-	"github.com/grokify/simplego/net/urlutil"
-	"github.com/grokify/simplego/strconv/phonenumber"
+	"github.com/grokify/goauth/scim"
+	"github.com/grokify/gophonenumbers"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/io/ioutilmore"
+	"github.com/grokify/mogo/net/urlutil"
 )
 
 type Person struct {
@@ -23,9 +23,9 @@ type Person struct {
 
 func addPhoneNumbers(chars []gameofthrones.Character) []gameofthrones.Character {
 	// Add fictitious phone numbers to GOT characters
-	a2g := phonenumber.NewAreaCodeToGeo()
+	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
-	fng := phonenumber.NewFakeNumberGenerator(a2g.AreaCodes())
+	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
 
 	set := map[uint64]int8{}
 	num := uint64(0)

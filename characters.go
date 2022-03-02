@@ -10,8 +10,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/grokify/oauth2more/scim"
-	"github.com/grokify/simplego/encoding/csvutil"
+	"github.com/grokify/goauth/scim"
+	"github.com/grokify/mogo/encoding/csvutil"
 )
 
 const (

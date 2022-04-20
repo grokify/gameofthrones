@@ -109,13 +109,14 @@ func main() {
 	chars, err = addPhoneNumbers(chars)
 	logutil.FatalErr(err)
 	chars = addEmail(chars)
-	fmtutil.PrintJSON(chars)
+	fmtutil.MustPrintJSON(chars)
 	for i, char := range chars {
 		char.Inflate()
 		chars[i] = char
 	}
 	outfile := "characters_out_inflated.json"
-	ioutilmore.WriteFileJSON(outfile, chars, 0644, "", "  ")
+	err = ioutilmore.WriteFileJSON(outfile, chars, 0644, "", "  ")
+	logutil.FatalErr(err)
 
 	outfile2 := "characters_out_rcev.json"
 	ioutilmore.WriteFileJSON(outfile2, ToRingCentral(chars), 0644, "", "  ")

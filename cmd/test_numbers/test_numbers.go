@@ -13,10 +13,10 @@ import (
 func main() {
 	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
-	fmtutil.PrintJSON(a2g)
+	fmtutil.MustPrintJSON(a2g)
 
 	acs := a2g.AreaCodes()
-	fmtutil.PrintJSON(acs)
+	fmtutil.MustPrintJSON(acs)
 	sortutil.Uint16s(acs)
 	fmt.Println("Ints:   ", acs)
 
@@ -31,5 +31,5 @@ func main() {
 	}
 
 	demoOrgs := gameofthrones.GetDemoOrganizations()
-	fmtutil.PrintJSON(demoOrgs)
+	fmtutil.MustPrintJSON(demoOrgs)
 }

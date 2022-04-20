@@ -11,6 +11,7 @@ import (
 	"github.com/grokify/gophonenumbers"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/io/ioutilmore"
+	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/urlutil"
 )
 
@@ -21,16 +22,20 @@ type Person struct {
 	DisplayName    string `json:"displayName,omitempty"`
 }
 
-func addPhoneNumbers(chars []gameofthrones.Character) []gameofthrones.Character {
+func addPhoneNumbers(chars []gameofthrones.Character) ([]gameofthrones.Character, error) {
 	// Add fictitious phone numbers to GOT characters
 	a2g := gophonenumbers.NewAreaCodeToGeo()
 	a2g.ReadData()
 	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
 
+	var err error
 	set := map[uint64]int8{}
 	num := uint64(0)
 	for i, char := range chars {
-		num, set = fng.RandomLocalNumberUSUnique(set)
+		num, set, err = fng.RandomLocalNumberUSUnique(set)
+		if err != nil {
+			return chars, err
+		}
 		e164 := fmt.Sprintf("+%d", num)
 
 		char.Character.PhoneNumbers = append(
@@ -39,7 +44,7 @@ func addPhoneNumbers(chars []gameofthrones.Character) []gameofthrones.Character 
 
 		chars[i] = char
 	}
-	return chars
+	return chars, nil
 }
 
 func addEmail(chars []gameofthrones.Character) []gameofthrones.Character {
@@ -93,21 +98,16 @@ func main() {
 
 	if 1 == 1 {
 		chars, err = gameofthrones.ReadCharactersCSV()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 	}
 	if 1 == 0 {
 		bytes, err := ioutil.ReadFile(file)
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 		err = json.Unmarshal(bytes, &chars)
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 	}
-	chars = addPhoneNumbers(chars)
+	chars, err = addPhoneNumbers(chars)
+	logutil.FatalErr(err)
 	chars = addEmail(chars)
 	fmtutil.PrintJSON(chars)
 	for i, char := range chars {
@@ -128,7 +128,7 @@ func main() {
 		c.IdNum = i + 1
 		rcChars[i] = c
 	}
-	fmtutil.PrintJSON(rcChars)
+	fmtutil.MustPrintJSON(rcChars)
 
 	outfile4 := "characters_out_rcev4.json"
 	ioutilmore.WriteFileJSON(outfile4, rcChars, 0644, "", "")

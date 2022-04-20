@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -163,7 +162,7 @@ func GetCharsJSONInflated() ([]gameofthrones.Character, error) {
 
 	filepath := "github.com/grokify/gameofthrones/examples/build_data/characters_out_inflated.json"
 	filepath = path.Join(os.Getenv("GOPATH"), "src", filepath)
-	bytes, err := ioutil.ReadFile(filepath)
+	bytes, err := os.ReadFile(filepath)
 	chars := []gameofthrones.Character{}
 	if err != nil {
 		return chars, err
@@ -186,7 +185,7 @@ func GetSfAccounts(sc salesforce.SalesforceClient) SfAccounts {
 		AccountSet:  acts,
 		NameToIdMap: map[string]string{}}
 	for _, rec := range acts.Records {
-		sfActs.NameToIdMap[rec.Name] = rec.Id
+		sfActs.NameToIdMap[rec.Name] = rec.ID
 	}
 	return sfActs
 }
@@ -205,7 +204,7 @@ func CreateCases(sc salesforce.SalesforceClient) {
 			Reason:      "Got trapped trying to catch a wight",
 			Priority:    "High",
 			IsEscalated: true,
-			OwnerId:     userinfo.UserId,
+			OwnerID:     userinfo.UserID,
 		},
 	}
 
@@ -216,8 +215,8 @@ func CreateCases(sc salesforce.SalesforceClient) {
 	for contactName, sfCase := range cases {
 		contact, err := contacts.GetContactByName(contactName)
 		if err == nil {
-			sfCase.ContactId = contact.Id
-			sfCase.AccountId = contact.AccountId
+			sfCase.ContactID = contact.ID
+			sfCase.AccountID = contact.AccountID
 		}
 		resp, err := sc.CreateSobject("Case", sfCase)
 		if err != nil {

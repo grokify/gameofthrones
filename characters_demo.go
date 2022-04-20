@@ -97,7 +97,10 @@ func GetDemoCharacters() (DemoCharacters, error) {
 					scim.Item{Value: e164})
 			} else {
 				num := uint64(0)
-				num, unique = fng.RandomLocalNumberUSUniqueAreaCodeSet(unique, acsOther)
+				num, unique, err = fng.RandomLocalNumberUSUniqueAreaCodeSet(unique, acsOther)
+				if err != nil {
+					return demoChars, err
+				}
 
 				e164 := fmt.Sprintf("+%d", num)
 				char.Character.PhoneNumbers = append(

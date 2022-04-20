@@ -9,6 +9,7 @@ import (
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/mogo/config"
 	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
 )
@@ -94,17 +95,13 @@ func main() {
 
 	if 1 == 0 {
 		resp, err := pc.GetPersons()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 		httputilmore.PrintResponse(resp, true)
 	}
 
 	if 1 == 0 {
 		resp, err := pc.GetOrganizationFields()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 		httputilmore.PrintResponse(resp, true)
 	}
 
@@ -113,9 +110,7 @@ func main() {
 		for _, org := range orgs {
 			fmt.Println(org)
 			resp, err := pc.CreateOrganization(RequestBody{Name: org})
-			if err != nil {
-				panic(err)
-			}
+			logutil.FatalErr(err)
 			fmt.Println(resp.StatusCode)
 			break
 		}
@@ -123,15 +118,11 @@ func main() {
 
 	if 1 == 1 {
 		chars, err := gameofthrones.ReadCharacters()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 		for _, char := range chars {
-			fmtutil.PrintJSON(char)
+			fmtutil.MustPrintJSON(char)
 			resp, err := pc.CreatePerson(RequestBody{Name: char.Character.DisplayName})
-			if err != nil {
-				panic(err)
-			}
+			logutil.FatalErr(err)
 			fmt.Println(resp.StatusCode)
 		}
 	}

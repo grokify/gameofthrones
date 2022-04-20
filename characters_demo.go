@@ -42,8 +42,12 @@ func (dc *DemoCharacters) CharactersSorted() []Character {
 }
 
 func GetDemoCharacters() (DemoCharacters, error) {
+	demoChars := DemoCharacters{CharactersMap: map[string]Character{}}
 	a2g := gophonenumbers.NewAreaCodeToGeo()
-	a2g.ReadData()
+	err := a2g.ReadData()
+	if err != nil {
+		return demoChars, err
+	}
 	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
 	unique := map[uint64]int8{}
 	acsOrgs := map[uint16]int8{}
@@ -51,8 +55,10 @@ func GetDemoCharacters() (DemoCharacters, error) {
 
 	aci := phonenumber.NewAreaCodeIncrementor(100)
 
-	demoChars := DemoCharacters{CharactersMap: map[string]Character{}}
-	demoOrgs := GetDemoOrganizations()
+	demoOrgs, err := GetDemoOrganizations()
+	if err != nil {
+		return demoChars, err
+	}
 
 	for _, demoOrg := range demoOrgs.OrganizationsMap {
 		if demoOrg.Phone > 0 {

@@ -14,6 +14,7 @@ import (
 	"github.com/grokify/goauth/salesforce"
 	"github.com/grokify/mogo/config"
 	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/ttacon/libphonenumber"
 )
@@ -47,10 +48,12 @@ type CreateAccountsRequest struct {
 	Records []Account `json:"records,omitempty"`
 }
 
-func GetAccounts() CreateAccountsRequest {
-	orgs := gameofthrones.GetDemoOrganizations()
-
+func GetAccounts() (CreateAccountsRequest, error) {
 	recs := CreateAccountsRequest{Records: []Account{}}
+	orgs, err := gameofthrones.GetDemoOrganizations()
+	if err != nil {
+		return recs, err
+	}
 
 	for _, org := range orgs.OrganizationsMap {
 		sf := Account{
@@ -75,7 +78,7 @@ func GetAccounts() CreateAccountsRequest {
 
 		recs.Records = append(recs.Records, sf)
 	}
-	return recs
+	return recs, nil
 }
 
 type Contact struct {
@@ -249,20 +252,17 @@ func main() {
 	}
 
 	sc, err := NewSalesforceClientEnv()
-	if err != nil {
-		panic(err)
-	}
+	logutil.FatalErr(err)
 
 	resp, err := sc.GetServicesData()
-	if err != nil {
-		panic(err)
-	}
+	logutil.FatalErr(err)
 
 	httputilmore.PrintResponse(resp, true)
 
 	switch action {
 	case "create_accounts":
-		acts := GetAccounts()
+		acts, err := GetAccounts()
+		logutil.FatalErr(err)
 
 		apiURL := sc.URLBuilder.Build("services/data/v41.0/composite/tree/Account/")
 

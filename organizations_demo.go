@@ -27,9 +27,13 @@ type DemoOrganizations struct {
 	OrganizationsMap map[string]DemoOrganization
 }
 
-func GetDemoOrganizations() DemoOrganizations {
+func GetDemoOrganizations() (DemoOrganizations, error) {
+	demoOrgs := DemoOrganizations{OrganizationsMap: map[string]DemoOrganization{}}
 	a2g := gophonenumbers.NewAreaCodeToGeo()
-	a2g.ReadData()
+	err := a2g.ReadData()
+	if err != nil {
+		return demoOrgs, err
+	}
 
 	acs := a2g.AreaCodes()
 	sortutil.Uint16s(acs)
@@ -40,8 +44,6 @@ func GetDemoOrganizations() DemoOrganizations {
 		"Free Folk":         1,
 		"Night's Watch":     1,
 		"The Lord of Light": 1}
-
-	demoOrgs := DemoOrganizations{OrganizationsMap: map[string]DemoOrganization{}}
 
 	fng := phonenumber.NewFakeNumberGenerator(acs)
 
@@ -66,5 +68,5 @@ func GetDemoOrganizations() DemoOrganizations {
 		}
 		demoOrgs.OrganizationsMap[demoOrg.Name] = demoOrg
 	}
-	return demoOrgs
+	return demoOrgs, nil
 }

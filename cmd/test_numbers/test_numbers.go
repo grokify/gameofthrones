@@ -5,6 +5,7 @@ import (
 
 	"github.com/grokify/gophonenumbers"
 	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/sort/sortutil"
 
 	"github.com/grokify/gameofthrones"
@@ -30,6 +31,7 @@ func main() {
 		fmt.Printf("%v %v %v\n", i, org, ac)
 	}
 
-	demoOrgs := gameofthrones.GetDemoOrganizations()
+	demoOrgs, err := gameofthrones.GetDemoOrganizations()
+	logutil.FatalErr(err)
 	fmtutil.MustPrintJSON(demoOrgs)
 }

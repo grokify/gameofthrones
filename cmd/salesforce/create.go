@@ -25,12 +25,12 @@ import (
 
 type Type struct {
 	Type        string `json:"type,omitempty"`
-	ReferenceId string `json:"referenceId,omitempty"`
+	ReferenceID string `json:"referenceId,omitempty"`
 }
 
 type AccountTreeResp struct {
 	ID          string `json:"id,omitempty"`
-	ReferenceId string `json:"referenceId,omitempty"`
+	ReferenceID string `json:"referenceId,omitempty"`
 }
 
 type Account struct {
@@ -60,7 +60,7 @@ func GetAccounts() (CreateAccountsRequest, error) {
 			Site: "Headquarters",
 			Attributes: Type{
 				Type:        "Account",
-				ReferenceId: fmt.Sprintf("ref0%v", org.Domain),
+				ReferenceID: fmt.Sprintf("ref0%v", org.Domain),
 			},
 		}
 

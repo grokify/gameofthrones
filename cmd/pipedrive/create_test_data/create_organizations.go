@@ -49,19 +49,19 @@ func (pc *PipedriveClient) BuildURL(path string) (string, error) {
 }
 
 func (pc *PipedriveClient) GetOrganizationFields() (*http.Response, error) {
-	apiUrl, err := pc.BuildURL("/organizationFields")
+	apiURL, err := pc.BuildURL("/organizationFields")
 	if err != nil {
-		return &http.Response{}, err
+		return nil, err
 	}
-	return pc.ClientMore.Client.Get(apiUrl)
+	return pc.ClientMore.Client.Get(apiURL)
 }
 
 func (pc *PipedriveClient) GetPersons() (*http.Response, error) {
-	apiUrl, err := pc.BuildURL("/persons")
+	apiURL, err := pc.BuildURL("/persons")
 	if err != nil {
-		return &http.Response{}, err
+		return nil, err
 	}
-	return pc.ClientMore.Client.Get(apiUrl)
+	return pc.ClientMore.Client.Get(apiURL)
 }
 
 func (pc *PipedriveClient) CreateOrganization(reqBody RequestBody) (*http.Response, error) {

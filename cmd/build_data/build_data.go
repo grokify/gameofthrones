@@ -25,10 +25,13 @@ type Person struct {
 func addPhoneNumbers(chars []gameofthrones.Character) ([]gameofthrones.Character, error) {
 	// Add fictitious phone numbers to GOT characters
 	a2g := gophonenumbers.NewAreaCodeToGeo()
-	a2g.ReadData()
+	err := a2g.ReadData()
+	if err != nil {
+		return chars, err
+	}
 	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
 
-	var err error
+	// var err error
 	set := map[uint64]int8{}
 	num := uint64(0)
 	for i, char := range chars {
@@ -115,13 +118,15 @@ func main() {
 		chars[i] = char
 	}
 	outfile := "characters_out_inflated.json"
-	err = ioutilmore.WriteFileJSON(outfile, chars, 0644, "", "  ")
+	err = ioutilmore.WriteFileJSON(outfile, chars, 0600, "", "  ")
 	logutil.FatalErr(err)
 
 	outfile2 := "characters_out_rcev.json"
-	ioutilmore.WriteFileJSON(outfile2, ToRingCentral(chars), 0644, "", "  ")
+	err = ioutilmore.WriteFileJSON(outfile2, ToRingCentral(chars), 0600, "", "  ")
+	logutil.FatalErr(err)
 	outfile3 := "characters_out_rcev2.json"
-	ioutilmore.WriteFileJSON(outfile3, ToRingCentral(chars), 0644, "", "")
+	err = ioutilmore.WriteFileJSON(outfile3, ToRingCentral(chars), 0600, "", "")
+	logutil.FatalErr(err)
 
 	rcChars := ToRingCentral(chars)
 	for i, c := range rcChars {
@@ -132,9 +137,11 @@ func main() {
 	fmtutil.MustPrintJSON(rcChars)
 
 	outfile4 := "characters_out_rcev4.json"
-	ioutilmore.WriteFileJSON(outfile4, rcChars, 0644, "", "")
+	err = ioutilmore.WriteFileJSON(outfile4, rcChars, 0600, "", "")
+	logutil.FatalErr(err)
 
-	fmtutil.PrintJSONMore(rcChars, "", "")
+	err = fmtutil.PrintJSONMore(rcChars, "", "")
+	logutil.FatalErr(err)
 
 	//fmt.Println("DONE")
 }

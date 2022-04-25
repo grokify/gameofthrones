@@ -89,7 +89,8 @@ func (pc *PipedriveClient) CreateOrIgnorePerson(reqBody RequestBody) (*http.Resp
 }
 
 func main() {
-	config.LoadDotEnv()
+	_, err := config.LoadDotEnv()
+	logutil.FatalErr(err)
 
 	pc := NewPipedriveClient(os.Getenv("PIPEDRIVE_API_KEY"))
 

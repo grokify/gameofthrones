@@ -166,18 +166,19 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 	return salesforce.NewSalesforceClientPassword(o2Creds)
 }
 
-func GetCharsJSONInflated() ([]gameofthrones.Character, error) {
-	return gameofthrones.ReadCharactersJSON()
-
-	filepath := "github.com/grokify/gameofthrones/examples/build_data/characters_out_inflated.json"
-	filepath = path.Join(os.Getenv("GOPATH"), "src", filepath)
-	bytes, err := os.ReadFile(filepath)
-	chars := []gameofthrones.Character{}
-	if err != nil {
+func GetCharsJSONInflated(debug bool) ([]gameofthrones.Character, error) {
+	if debug {
+		filepath := "github.com/grokify/gameofthrones/examples/build_data/characters_out_inflated.json"
+		filepath = path.Join(os.Getenv("GOPATH"), "src", filepath)
+		bytes, err := os.ReadFile(filepath)
+		chars := []gameofthrones.Character{}
+		if err != nil {
+			return chars, err
+		}
+		err = json.Unmarshal(bytes, &chars)
 		return chars, err
 	}
-	err = json.Unmarshal(bytes, &chars)
-	return chars, err
+	return gameofthrones.ReadCharactersJSON()
 }
 
 type SfAccounts struct {

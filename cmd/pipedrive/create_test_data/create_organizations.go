@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"
+	"github.com/jessevdk/go-flags"
 )
 
 var BaseURL = "https://companydomain.pipedrive.com/v1"
@@ -88,36 +90,39 @@ func (pc *PipedriveClient) CreateOrIgnorePerson(reqBody RequestBody) (*http.Resp
 	return pc.ClientMore.PostToJSON(apiURL, reqBody)
 }
 
+type Options struct {
+	Command string `short:"c" long:"create" description:"Command [get_persons,get_org_fields,create_people,create_orgs]"`
+}
+
 func main() {
 	_, err := config.LoadDotEnv()
 	logutil.FatalErr(err)
 
+	opts := Options{}
+	_, err = flags.Parse(&opts)
+	logutil.FatalErr(err)
+
 	pc := NewPipedriveClient(os.Getenv("PIPEDRIVE_API_KEY"))
 
-	if 1 == 0 {
+	switch opts.Command {
+	case "get_persons":
 		resp, err := pc.GetPersons()
 		logutil.FatalErr(err)
 		logutil.FatalErr(httputilmore.PrintResponse(resp, true))
-	}
-
-	if 1 == 0 {
+	case "get_org_fields":
 		resp, err := pc.GetOrganizationFields()
 		logutil.FatalErr(err)
 		logutil.FatalErr(httputilmore.PrintResponse(resp, true))
-	}
-
-	if 1 == 0 {
+	case "create_people":
 		orgs := gameofthrones.Organizations
 		for _, org := range orgs {
 			fmt.Println(org)
 			resp, err := pc.CreateOrganization(RequestBody{Name: org})
 			logutil.FatalErr(err)
 			fmt.Println(resp.StatusCode)
-			break
+			// break
 		}
-	}
-
-	if 1 == 1 {
+	case "create_orgs":
 		chars, err := gameofthrones.ReadCharacters()
 		logutil.FatalErr(err)
 		for _, char := range chars {
@@ -126,5 +131,7 @@ func main() {
 			logutil.FatalErr(err)
 			fmt.Println(resp.StatusCode)
 		}
+	default:
+		log.Fatal("command must be one of [get_persons,get_org_fields,create_people,create_orgs]")
 	}
 }

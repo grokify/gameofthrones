@@ -12,6 +12,7 @@ import (
 	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/urlutil"
+	"github.com/jessevdk/go-flags"
 )
 
 type Person struct {
@@ -93,21 +94,28 @@ func ToRingCentral(chars []gameofthrones.Character) []RcEvContact {
 	return rcChars
 }
 
-func main() {
-	file := "characters_out.json"
-	chars := []gameofthrones.Character{}
-	var err error
+type Options struct {
+	ReadFile []bool `short:"f" long:"file" description:"read characters from file"`
+}
 
-	if 1 == 1 {
-		chars, err = gameofthrones.ReadCharactersCSV()
-		logutil.FatalErr(err)
-	}
-	if 1 == 0 {
+func main() {
+	opts := Options{}
+	_, err := flags.Parse(&opts)
+	logutil.FatalErr(err)
+
+	chars := []gameofthrones.Character{}
+
+	if len(opts.ReadFile) > 0 {
+		file := "characters_out.json"
 		bytes, err := ioutil.ReadFile(file)
 		logutil.FatalErr(err)
 		err = json.Unmarshal(bytes, &chars)
 		logutil.FatalErr(err)
+	} else {
+		chars, err = gameofthrones.ReadCharactersCSV()
+		logutil.FatalErr(err)
 	}
+
 	chars, err = addPhoneNumbers(chars)
 	logutil.FatalErr(err)
 	chars = addEmail(chars)

@@ -15,12 +15,14 @@ import (
 	"github.com/jessevdk/go-flags"
 )
 
+/*
 type Person struct {
 	AdditionalName string `json:"additionalName,omitempty"`
 	GivenName      string `json:"givenName,omitempty"`
 	FamilyName     string `json:"familyName,omitempty"`
 	DisplayName    string `json:"displayName,omitempty"`
 }
+*/
 
 func addPhoneNumbers(chars []gameofthrones.Character) ([]gameofthrones.Character, error) {
 	// Add fictitious phone numbers to GOT characters

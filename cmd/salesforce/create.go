@@ -1,11 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
-	"path"
 	"strings"
 
 	"github.com/grokify/gameofthrones"
@@ -28,10 +26,12 @@ type Type struct {
 	ReferenceID string `json:"referenceId,omitempty"`
 }
 
+/*
 type AccountTreeResp struct {
 	ID          string `json:"id,omitempty"`
 	ReferenceID string `json:"referenceId,omitempty"`
 }
+*/
 
 type Account struct {
 	Attributes        Type   `json:"attributes,omitempty"`
@@ -166,6 +166,7 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 	return salesforce.NewSalesforceClientPassword(o2Creds)
 }
 
+/*
 func GetCharsJSONInflated(debug bool) ([]gameofthrones.Character, error) {
 	if debug {
 		filepath := "github.com/grokify/gameofthrones/examples/build_data/characters_out_inflated.json"
@@ -180,6 +181,7 @@ func GetCharsJSONInflated(debug bool) ([]gameofthrones.Character, error) {
 	}
 	return gameofthrones.ReadCharactersJSON()
 }
+*/
 
 type SfAccounts struct {
 	AccountSet  sobjects.AccountSet

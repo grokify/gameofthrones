@@ -13,7 +13,6 @@ import (
 	"github.com/grokify/goauth/credentials"
 	"github.com/grokify/goauth/salesforce"
 	"github.com/grokify/mogo/config"
-	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/ttacon/libphonenumber"
@@ -90,7 +89,7 @@ type Contact struct {
 	AccountId string `json:",omitempty"`
 }
 
-func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Character, sfActs SfAccounts) {
+func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Character, sfActs SfAccounts) error {
 	//https://developer.salesforce.com/forums/?id=906F0000000ApxUIAS
 
 	for _, char := range chars {
@@ -104,9 +103,12 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 			e164 := char.Character.PhoneNumbers[0].Value
 
 			num, err := libphonenumber.Parse(e164, "US")
+			if err != nil {
+				return err
+			}
 			contact.Phone = libphonenumber.Format(num, libphonenumber.NATIONAL)
 			if err != nil {
-				panic(err)
+				return err
 			}
 		}
 
@@ -119,11 +121,15 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 
 		resp, err := sc.CreateContact(contact) //cm.PostToJSON(apiURL.String(), contact)
 		if err != nil {
-			panic(err)
+			return err
 		}
-		fmt.Printf("%v\n", resp.StatusCode)
-		httputilmore.PrintResponse(resp, true)
+		// fmt.Printf("%v\n", resp.StatusCode)
+		err = httputilmore.PrintResponse(resp, true)
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
 func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
@@ -155,8 +161,8 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 		}
 	*/
 
-	fmtutil.PrintJSON(o2Creds)
-	//fmtutil.PrintJSON(usrCreds)
+	// fmtutil.PrintJSON(o2Creds)
+	// fmtutil.PrintJSON(usrCreds)
 	return salesforce.NewSalesforceClientPassword(o2Creds)
 }
 
@@ -198,9 +204,9 @@ func CreateCases(sc salesforce.SalesforceClient) {
 	if err != nil {
 		panic(err)
 	}
-	fmtutil.PrintJSON(userinfo)
+	// fmtutil.PrintJSON(userinfo)
 
-	fmt.Println("CREATING_CASES")
+	// fmt.Println("CREATING_CASES")
 	cases := map[string]sobjects.Case{
 		"Jon Snow": sobjects.Case{
 			Subject:     "Needs rescue north of The Wall",
@@ -267,22 +273,20 @@ func main() {
 		apiURL := sc.URLBuilder.Build("services/data/v41.0/composite/tree/Account/")
 
 		resp, err = sc.ClientMore.PostToJSON(apiURL.String(), acts)
+		logutil.FatalErr(err)
 
 		fmt.Printf("%v\n", resp.StatusCode)
 		httputilmore.PrintResponse(resp, true)
 	case "delete_accounts":
 		err := sc.DeleteAccountsAll()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 	case "create_contacts":
 		chars, err := gameofthrones.GetDemoCharacters()
-		if err != nil {
-			panic(err)
-		}
+		logutil.FatalErr(err)
 		LoadCharacters(sc, chars.CharactersSorted(), GetSfAccounts(sc))
 	case "delete_contacts":
-		sc.DeleteContactsAll()
+		err := sc.DeleteContactsAll()
+		logutil.FatalErr(err)
 	case "create_cases":
 		CreateCases(sc)
 	}

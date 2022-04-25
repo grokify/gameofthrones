@@ -13,7 +13,8 @@ import (
 
 func main() {
 	a2g := gophonenumbers.NewAreaCodeToGeo()
-	a2g.ReadData()
+	err := a2g.ReadData()
+	logutil.FatalErr(err)
 	fmtutil.MustPrintJSON(a2g)
 
 	acs := a2g.AreaCodes()

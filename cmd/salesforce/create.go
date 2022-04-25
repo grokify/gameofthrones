@@ -208,7 +208,7 @@ func CreateCases(sc salesforce.SalesforceClient) error {
 
 	// fmt.Println("CREATING_CASES")
 	cases := map[string]sobjects.Case{
-		"Jon Snow": sobjects.Case{
+		"Jon Snow": {
 			Subject:     "Needs rescue north of The Wall",
 			Reason:      "Got trapped trying to catch a wight",
 			Priority:    "High",

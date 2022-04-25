@@ -21,7 +21,7 @@ type RequestBody struct {
 }
 
 type PipedriveClient struct {
-	ApiKey     string
+	APIKey     string
 	ClientMore httputilmore.ClientMore
 }
 
@@ -29,7 +29,7 @@ func NewPipedriveClient(apiKey string) PipedriveClient {
 	client := &http.Client{}
 	cm := httputilmore.ClientMore{Client: client}
 	return PipedriveClient{
-		ApiKey:     apiKey,
+		APIKey:     apiKey,
 		ClientMore: cm}
 }
 
@@ -40,7 +40,7 @@ func (pc *PipedriveClient) BuildURL(path string) (string, error) {
 		return "", err
 	}
 	v := url.Values{}
-	v.Add("api_token", pc.ApiKey)
+	v.Add("api_token", pc.APIKey)
 	uz, err := urlutil.URLAddQueryValuesString(u.String(), v)
 	if err != nil {
 		return "", err
@@ -65,27 +65,27 @@ func (pc *PipedriveClient) GetPersons() (*http.Response, error) {
 }
 
 func (pc *PipedriveClient) CreateOrganization(reqBody RequestBody) (*http.Response, error) {
-	apiUrl, err := pc.BuildURL("/organizations")
+	apiURL, err := pc.BuildURL("/organizations")
 	if err != nil {
 		return &http.Response{}, err
 	}
-	return pc.ClientMore.PostToJSON(apiUrl, reqBody)
+	return pc.ClientMore.PostToJSON(apiURL, reqBody)
 }
 
 func (pc *PipedriveClient) CreatePerson(reqBody RequestBody) (*http.Response, error) {
-	apiUrl, err := pc.BuildURL("/persons")
+	apiURL, err := pc.BuildURL("/persons")
 	if err != nil {
 		return &http.Response{}, err
 	}
-	return pc.ClientMore.PostToJSON(apiUrl, reqBody)
+	return pc.ClientMore.PostToJSON(apiURL, reqBody)
 }
 
 func (pc *PipedriveClient) CreateOrIgnorePerson(reqBody RequestBody) (*http.Response, error) {
-	apiUrl, err := pc.BuildURL("/persons")
+	apiURL, err := pc.BuildURL("/persons")
 	if err != nil {
 		return &http.Response{}, err
 	}
-	return pc.ClientMore.PostToJSON(apiUrl, reqBody)
+	return pc.ClientMore.PostToJSON(apiURL, reqBody)
 }
 
 func main() {
@@ -97,15 +97,13 @@ func main() {
 	if 1 == 0 {
 		resp, err := pc.GetPersons()
 		logutil.FatalErr(err)
-		err = httputilmore.PrintResponse(resp, true)
-		logutil.FatalErr(err)
+		logutil.FatalErr(httputilmore.PrintResponse(resp, true))
 	}
 
 	if 1 == 0 {
 		resp, err := pc.GetOrganizationFields()
 		logutil.FatalErr(err)
-		err = httputilmore.PrintResponse(resp, true)
-		logutil.FatalErr(err)
+		logutil.FatalErr(httputilmore.PrintResponse(resp, true))
 	}
 
 	if 1 == 0 {

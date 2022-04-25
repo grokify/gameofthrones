@@ -86,7 +86,7 @@ type Contact struct {
 	Name      string `json:",omitempty"`
 	Email     string `json:",omitempty"`
 	Phone     string `json:",omitempty"`
-	AccountId string `json:",omitempty"`
+	AccountID string `json:",omitempty"`
 }
 
 func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Character, sfActs SfAccounts) error {
@@ -114,8 +114,8 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 
 		if len(char.Organization.Name) > 0 {
 			orgName := char.Organization.Name
-			if actId, ok := sfActs.NameToIdMap[orgName]; ok {
-				contact.AccountId = actId
+			if actId, ok := sfActs.NameToIDMap[orgName]; ok {
+				contact.AccountID = actId
 			}
 		}
 
@@ -182,7 +182,7 @@ func GetCharsJSONInflated() ([]gameofthrones.Character, error) {
 
 type SfAccounts struct {
 	AccountSet  sobjects.AccountSet
-	NameToIdMap map[string]string
+	NameToIDMap map[string]string
 }
 
 func GetSfAccounts(sc salesforce.SalesforceClient) SfAccounts {
@@ -192,9 +192,9 @@ func GetSfAccounts(sc salesforce.SalesforceClient) SfAccounts {
 	}
 	sfActs := SfAccounts{
 		AccountSet:  acts,
-		NameToIdMap: map[string]string{}}
+		NameToIDMap: map[string]string{}}
 	for _, rec := range acts.Records {
-		sfActs.NameToIdMap[rec.Name] = rec.ID
+		sfActs.NameToIDMap[rec.Name] = rec.ID
 	}
 	return sfActs
 }

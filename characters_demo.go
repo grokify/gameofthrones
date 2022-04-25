@@ -23,7 +23,7 @@ func (dc *DemoCharacters) LoadCharacters(chars []Character) {
 
 func (dc *DemoCharacters) NamesSorted() []string {
 	names := []string{}
-	for name, _ := range dc.CharactersMap {
+	for name := range dc.CharactersMap {
 		names = append(names, name)
 	}
 	sort.Strings(names)

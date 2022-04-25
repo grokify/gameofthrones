@@ -97,13 +97,15 @@ func main() {
 	if 1 == 0 {
 		resp, err := pc.GetPersons()
 		logutil.FatalErr(err)
-		httputilmore.PrintResponse(resp, true)
+		err = httputilmore.PrintResponse(resp, true)
+		logutil.FatalErr(err)
 	}
 
 	if 1 == 0 {
 		resp, err := pc.GetOrganizationFields()
 		logutil.FatalErr(err)
-		httputilmore.PrintResponse(resp, true)
+		err = httputilmore.PrintResponse(resp, true)
+		logutil.FatalErr(err)
 	}
 
 	if 1 == 0 {

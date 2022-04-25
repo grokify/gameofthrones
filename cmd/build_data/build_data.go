@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 
@@ -64,8 +63,8 @@ func addEmail(chars []gameofthrones.Character) []gameofthrones.Character {
 }
 
 type RcEvContact struct {
-	Id           string            `json:"id,omitempty"`
-	IdNum        int               `json:"_id,omitempty"`
+	ID           string            `json:"id,omitempty"`
+	IDNum        int               `json:"_id,omitempty"`
 	Name         string            `json:"name,omitempty"`
 	Type         string            `json:"type,omitempty"`
 	PhoneNumbers []RcEvPhoneNumber `json:"phoneNumbers,omitempty"`
@@ -80,7 +79,7 @@ func ToRingCentral(chars []gameofthrones.Character) []RcEvContact {
 	rcChars := []RcEvContact{}
 	for _, char := range chars {
 		rcChars = append(rcChars, RcEvContact{
-			Id:   char.Character.PhoneNumbers[0].Value,
+			ID:   char.Character.PhoneNumbers[0].Value,
 			Name: char.Character.DisplayName,
 			Type: "Game of Thrones",
 			PhoneNumbers: []RcEvPhoneNumber{
@@ -97,7 +96,7 @@ func ToRingCentral(chars []gameofthrones.Character) []RcEvContact {
 func main() {
 	file := "characters_out.json"
 	chars := []gameofthrones.Character{}
-	err := errors.New("")
+	var err error
 
 	if 1 == 1 {
 		chars, err = gameofthrones.ReadCharactersCSV()
@@ -130,8 +129,8 @@ func main() {
 
 	rcChars := ToRingCentral(chars)
 	for i, c := range rcChars {
-		c.Id = ""
-		c.IdNum = i + 1
+		c.ID = ""
+		c.IDNum = i + 1
 		rcChars[i] = c
 	}
 	fmtutil.MustPrintJSON(rcChars)

@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -37,13 +36,13 @@ func ReadCharactersJSON(filepaths ...string) ([]Character, error) {
 	case 1:
 		return ReadCharactersPathJSON(filepaths[0])
 	default:
-		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed.")
+		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed")
 	}
 }
 
 func ReadCharactersPathJSON(filepath string) ([]Character, error) {
 	chars := []Character{}
-	bytes, err := ioutil.ReadFile(filepath)
+	bytes, err := os.ReadFile(filepath)
 	if err != nil {
 		return chars, err
 	}
@@ -58,7 +57,7 @@ func ReadCharactersCSV(filepaths ...string) ([]Character, error) {
 	case 1:
 		return ReadCharactersPathCSV(filepaths[0])
 	default:
-		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed.")
+		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed")
 	}
 }
 
@@ -81,7 +80,7 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 			err = errx
 			break
 		} else if len(rec) < 2 {
-			err = errors.New(fmt.Sprintf("bad data: %v\n", rec))
+			err = fmt.Errorf("bad data [%v]", rec)
 			break
 		}
 		char := Character{

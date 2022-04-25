@@ -114,8 +114,8 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 
 		if len(char.Organization.Name) > 0 {
 			orgName := char.Organization.Name
-			if actId, ok := sfActs.NameToIDMap[orgName]; ok {
-				contact.AccountID = actId
+			if actID, ok := sfActs.NameToIDMap[orgName]; ok {
+				contact.AccountID = actID
 			}
 		}
 

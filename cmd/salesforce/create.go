@@ -199,10 +199,10 @@ func GetSfAccounts(sc salesforce.SalesforceClient) SfAccounts {
 	return sfActs
 }
 
-func CreateCases(sc salesforce.SalesforceClient) {
+func CreateCases(sc salesforce.SalesforceClient) error {
 	userinfo, err := sc.UserInfo()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	// fmtutil.PrintJSON(userinfo)
 
@@ -219,7 +219,7 @@ func CreateCases(sc salesforce.SalesforceClient) {
 
 	contacts, err := sc.GetContactsAll()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	for contactName, sfCase := range cases {
 		contact, err := contacts.GetContactByName(contactName)
@@ -229,13 +229,17 @@ func CreateCases(sc salesforce.SalesforceClient) {
 		}
 		resp, err := sc.CreateSobject("Case", sfCase)
 		if err != nil {
-			panic(err)
+			return err
 		}
 		fmt.Println(resp.StatusCode)
 		if resp.StatusCode > 399 {
-			httputilmore.PrintResponse(resp, true)
+			err := httputilmore.PrintResponse(resp, true)
+			if err != nil {
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 var commands = map[string]int{
@@ -254,7 +258,7 @@ func main() {
 	action = strings.ToLower(strings.TrimSpace(action))
 
 	if _, ok := commands[action]; !ok {
-		panic(fmt.Sprintf("Please enter one valid action\nUsage: create -action create_accounts|delete_accounts|create_contacts|delete_contacts|create_cases"))
+		panic("Please enter one valid action\nUsage: create -action create_accounts|delete_accounts|create_contacts|delete_contacts|create_cases")
 	}
 
 	sc, err := NewSalesforceClientEnv()
@@ -263,7 +267,7 @@ func main() {
 	resp, err := sc.GetServicesData()
 	logutil.FatalErr(err)
 
-	httputilmore.PrintResponse(resp, true)
+	logutil.FatalErr(httputilmore.PrintResponse(resp, true))
 
 	switch action {
 	case "create_accounts":
@@ -276,19 +280,17 @@ func main() {
 		logutil.FatalErr(err)
 
 		fmt.Printf("%v\n", resp.StatusCode)
-		httputilmore.PrintResponse(resp, true)
+		logutil.FatalErr(httputilmore.PrintResponse(resp, true))
 	case "delete_accounts":
-		err := sc.DeleteAccountsAll()
-		logutil.FatalErr(err)
+		logutil.FatalErr(sc.DeleteAccountsAll())
 	case "create_contacts":
 		chars, err := gameofthrones.GetDemoCharacters()
 		logutil.FatalErr(err)
-		LoadCharacters(sc, chars.CharactersSorted(), GetSfAccounts(sc))
+		logutil.FatalErr(LoadCharacters(sc, chars.CharactersSorted(), GetSfAccounts(sc)))
 	case "delete_contacts":
-		err := sc.DeleteContactsAll()
-		logutil.FatalErr(err)
+		logutil.FatalErr(sc.DeleteContactsAll())
 	case "create_cases":
-		CreateCases(sc)
+		logutil.FatalErr(CreateCases(sc))
 	}
 	fmt.Println("DONE")
 }

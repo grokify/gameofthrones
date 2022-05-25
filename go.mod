@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/grokify/go-salesforce v0.2.4
-	github.com/grokify/goauth v0.13.5
+	github.com/grokify/goauth v0.13.6
 	github.com/grokify/gophonenumbers v0.3.1
 	github.com/grokify/mogo v0.39.4
 	github.com/jessevdk/go-flags v1.5.0

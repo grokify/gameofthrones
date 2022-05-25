@@ -3,7 +3,7 @@ module github.com/grokify/gameofthrones
 go 1.16
 
 require (
-	github.com/grokify/go-salesforce v0.2.3
+	github.com/grokify/go-salesforce v0.2.4
 	github.com/grokify/goauth v0.13.5
 	github.com/grokify/gophonenumbers v0.3.1
 	github.com/grokify/mogo v0.39.4

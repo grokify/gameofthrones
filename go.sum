@@ -233,8 +233,9 @@ github.com/grokify/base36 v1.0.5/go.mod h1:L+1aaUBGfp5Ctar7KCS5G9uPABo1Ccu1Ct2iQ
 github.com/grokify/bitcoinmath v0.1.0/go.mod h1:Y8OyDefB55NHGzi+uJshYmE4Hn5juIQqJahsQJN5o2k=
 github.com/grokify/elastirad-go v0.1.10/go.mod h1:xPKbZAeEQiBykAqRxdipnsyAa1+csHRccb45335CKiU=
 github.com/grokify/go-salesforce v0.2.2/go.mod h1:f7XGz8g0ivI5vhOSZanYGOJr7OkeTVR5g8pTBSWfIn0=
-github.com/grokify/go-salesforce v0.2.4 h1:y5BEek6zlYelGHd0iTwp9/5SFiEDKsh1ZSGkOI9pRco=
 github.com/grokify/go-salesforce v0.2.4/go.mod h1:E0ywAexR+gkvI3spzn+JjVMQZ6bLC0U6MJKV84172u0=
+github.com/grokify/go-salesforce v0.2.5 h1:a3MZHFaaCFVJZQVg+Y/s3k1VHNCmJIgX8Yj6ebyko/o=
+github.com/grokify/go-salesforce v0.2.5/go.mod h1:kwZdnHIILxwwBFjtHWbQ8Xk5uL6cw4tcEwY134+XQhs=
 github.com/grokify/goauth v0.13.4/go.mod h1:HxSsWAxCHIoZfi2j+nNH+n6mapDf5yCXiJcDHezAo+E=
 github.com/grokify/goauth v0.15.2 h1:OyvIhB6MUv1xKkEfnIMQaYTA/sYxFIKzD+8JYefEG3Y=
 github.com/grokify/goauth v0.15.2/go.mod h1:94aGHUIRMy+y2r5f8JGxPL6jgNBQ6sX6xwSQHBLpZkI=

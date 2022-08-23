@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/grokify/go-salesforce v0.2.6
 	github.com/grokify/goauth v0.16.0
-	github.com/grokify/gophonenumbers v0.3.1
+	github.com/grokify/gophonenumbers v0.3.2
 	github.com/grokify/mogo v0.40.4
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ttacon/libphonenumber v1.2.1
@@ -30,10 +30,10 @@ require (
 	github.com/kellydunn/golang-geo v0.7.0 // indirect
 	github.com/klauspost/compress v1.15.0 // indirect
 	github.com/kylelemons/go-gypsy v1.0.0 // indirect
-	github.com/lib/pq v1.0.0 // indirect
+	github.com/lib/pq v1.10.6 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nyaruka/phonenumbers v1.0.74 // indirect
+	github.com/nyaruka/phonenumbers v1.1.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/ttacon/builder v0.0.0-20170518171403-c099f663e1c2 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

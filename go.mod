@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/grokify/go-salesforce v0.2.6
-	github.com/grokify/goauth v0.16.0
+	github.com/grokify/goauth v0.16.1
 	github.com/grokify/gophonenumbers v0.3.2
 	github.com/grokify/mogo v0.40.4
 	github.com/jessevdk/go-flags v1.5.0
@@ -17,7 +17,7 @@ require (
 	github.com/aws/aws-lambda-go v1.17.0 // indirect
 	github.com/buaazp/fasthttprouter v0.1.1 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
-	github.com/caarlos0/env/v6 v6.9.3 // indirect
+	github.com/caarlos0/env/v6 v6.10.0 // indirect
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
@@ -41,7 +41,7 @@ require (
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/net v0.0.0-20220812174116-3211cb980234 // indirect
-	golang.org/x/oauth2 v0.0.0-20220808172628-8227340efae7 // indirect
+	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094 // indirect
 	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/appengine v1.6.7 // indirect

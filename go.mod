@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/grokify/go-salesforce v0.2.6
-	github.com/grokify/goauth v0.16.1
+	github.com/grokify/goauth v0.16.2
 	github.com/grokify/gophonenumbers v0.3.2
 	github.com/grokify/mogo v0.40.4
 	github.com/jessevdk/go-flags v1.5.0

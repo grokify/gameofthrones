@@ -32,8 +32,8 @@ github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
-github.com/grokify/go-salesforce v0.2.6 h1:W9a9HL2eQmMtR9lx1gXGcpCDeuaMXiGkhggLziPx+M8=
-github.com/grokify/go-salesforce v0.2.6/go.mod h1:lkf8/A6GkJjU6SRxZ44Z60+FThP4gSMGn9wdya9I934=
+github.com/grokify/go-salesforce v0.2.7 h1:NpopwvpIiInZrvCyLUlNoMq5i5OybodhbpRFA4P28IQ=
+github.com/grokify/go-salesforce v0.2.7/go.mod h1:GTvShpJTwJs9P/E9dp4PkXFWDtinxdd2TLloRj3YQ9c=
 github.com/grokify/goauth v0.16.2 h1:H1IkedCVJ5I2OtbdSNyVzVdziBIqSTNAW9rIGcaYJp8=
 github.com/grokify/goauth v0.16.2/go.mod h1:nsftcENLMdnExOgYE0Jp8nRkrzJ7EKbntxbqe0OHEfQ=
 github.com/grokify/gohttp v0.2.1 h1:9WRHON2OUcQOjbbs12rMSfmepZVzlUxB0etNX/gowCo=

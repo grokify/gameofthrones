@@ -6,7 +6,7 @@ require (
 	github.com/grokify/go-salesforce v0.2.6
 	github.com/grokify/goauth v0.16.2
 	github.com/grokify/gophonenumbers v0.3.2
-	github.com/grokify/mogo v0.40.5
+	github.com/grokify/mogo v0.40.6
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ttacon/libphonenumber v1.2.1
 )
@@ -40,10 +40,10 @@ require (
 	github.com/valyala/fasthttp v1.35.0 // indirect
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
-	golang.org/x/net v0.0.0-20221014081412-f15817d10f9b // indirect
+	golang.org/x/net v0.0.0-20221017152216-f25eb7ecb193 // indirect
 	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094 // indirect
-	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10 // indirect
-	golang.org/x/text v0.3.8 // indirect
+	golang.org/x/sys v0.0.0-20221010170243-090e33056c14 // indirect
+	golang.org/x/text v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/jeevatkm/go-model.v1 v1.1.0 // indirect

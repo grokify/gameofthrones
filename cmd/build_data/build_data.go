@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/goauth/scim"
@@ -12,7 +12,7 @@ import (
 	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/urlutil"
-	"github.com/jessevdk/go-flags"
+	flags "github.com/jessevdk/go-flags"
 )
 
 /*
@@ -109,7 +109,7 @@ func main() {
 
 	if len(opts.ReadFile) > 0 {
 		file := "characters_out.json"
-		bytes, err := ioutil.ReadFile(file)
+		bytes, err := os.ReadFile(file)
 		logutil.FatalErr(err)
 		err = json.Unmarshal(bytes, &chars)
 		logutil.FatalErr(err)

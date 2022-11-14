@@ -15,7 +15,7 @@ This is available for:
 * Pipedrive: [examples/pipedrive](examples/pipedrive)
 
  [build-status-svg]: https://github.com/grokify/gameofthrones/workflows/test/badge.svg?branch=master
- [build-status-url]: https://github.com/grokify/gameofthrones/actions/workflows/go_build.yaml
+ [build-status-url]: https://github.com/grokify/gameofthrones/actions/workflows/test.yaml
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/gameofthrones
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/gameofthrones
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/gameofthrones

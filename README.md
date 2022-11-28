@@ -11,8 +11,8 @@ It also has the ability to generate test data for software demos including ficti
 
 This is available for:
 
-* Salesforce: [examples/salesforce](examples/salesforce)
-* Pipedrive: [examples/pipedrive](examples/pipedrive)
+* Salesforce: [cmd/salesforce](cmd/salesforce)
+* Pipedrive: [cmd/pipedrive](cmd/pipedrive)
 
  [build-status-svg]: https://github.com/grokify/gameofthrones/workflows/test/badge.svg?branch=master
  [build-status-url]: https://github.com/grokify/gameofthrones/actions/workflows/test.yaml

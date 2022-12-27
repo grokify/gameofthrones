@@ -3,10 +3,10 @@ module github.com/grokify/gameofthrones
 go 1.18
 
 require (
-	github.com/grokify/go-salesforce v0.2.10
+	github.com/grokify/go-salesforce v0.2.12
 	github.com/grokify/goauth v0.16.6
 	github.com/grokify/gophonenumbers v0.3.2
-	github.com/grokify/mogo v0.41.6
+	github.com/grokify/mogo v0.44.0
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ttacon/libphonenumber v1.2.1
 )
@@ -24,7 +24,7 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/grokify/gohttp v0.2.2 // indirect
-	github.com/huandu/xstrings v1.3.3 // indirect
+	github.com/huandu/xstrings v1.4.0 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kellydunn/golang-geo v0.7.0 // indirect
@@ -40,11 +40,11 @@ require (
 	github.com/valyala/fasthttp v1.43.0 // indirect
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
-	golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9 // indirect
-	golang.org/x/net v0.2.0 // indirect
+	golang.org/x/exp v0.0.0-20221217163422-3c43f8badb15 // indirect
+	golang.org/x/net v0.4.0 // indirect
 	golang.org/x/oauth2 v0.2.0 // indirect
-	golang.org/x/sys v0.2.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/sys v0.3.0 // indirect
+	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/jeevatkm/go-model.v1 v1.1.0 // indirect

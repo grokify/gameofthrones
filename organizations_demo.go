@@ -36,7 +36,7 @@ func GetDemoOrganizations() (DemoOrganizations, error) {
 	}
 
 	acs := a2g.AreaCodes()
-	sortutil.Uint16s(acs)
+	sortutil.Slice(acs)
 
 	orgs := Organizations
 

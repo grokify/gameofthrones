@@ -9,9 +9,9 @@ import (
 	"github.com/grokify/goauth/scim"
 	"github.com/grokify/gophonenumbers"
 	"github.com/grokify/mogo/fmt/fmtutil"
-	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/log/logutil"
 	"github.com/grokify/mogo/net/urlutil"
+	"github.com/grokify/mogo/os/osutil"
 	flags "github.com/jessevdk/go-flags"
 )
 
@@ -127,14 +127,14 @@ func main() {
 		chars[i] = char
 	}
 	outfile := "characters_out_inflated.json"
-	err = ioutilmore.WriteFileJSON(outfile, chars, 0600, "", "  ")
+	err = osutil.WriteFileJSON(outfile, chars, 0600, "", "  ")
 	logutil.FatalErr(err)
 
 	outfile2 := "characters_out_rcev.json"
-	err = ioutilmore.WriteFileJSON(outfile2, ToRingCentral(chars), 0600, "", "  ")
+	err = osutil.WriteFileJSON(outfile2, ToRingCentral(chars), 0600, "", "  ")
 	logutil.FatalErr(err)
 	outfile3 := "characters_out_rcev2.json"
-	err = ioutilmore.WriteFileJSON(outfile3, ToRingCentral(chars), 0600, "", "")
+	err = osutil.WriteFileJSON(outfile3, ToRingCentral(chars), 0600, "", "")
 	logutil.FatalErr(err)
 
 	rcChars := ToRingCentral(chars)
@@ -146,7 +146,7 @@ func main() {
 	fmtutil.MustPrintJSON(rcChars)
 
 	outfile4 := "characters_out_rcev4.json"
-	err = ioutilmore.WriteFileJSON(outfile4, rcChars, 0600, "", "")
+	err = osutil.WriteFileJSON(outfile4, rcChars, 0600, "", "")
 	logutil.FatalErr(err)
 
 	err = fmtutil.PrintJSONMore(rcChars, "", "")

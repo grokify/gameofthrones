@@ -19,7 +19,7 @@ func main() {
 
 	acs := a2g.AreaCodes()
 	fmtutil.MustPrintJSON(acs)
-	sortutil.Uint16s(acs)
+	sortutil.Slice(acs)
 	fmt.Println("Ints:   ", acs)
 
 	orgs := gameofthrones.Organizations

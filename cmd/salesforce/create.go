@@ -133,7 +133,7 @@ func LoadCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Charac
 }
 
 func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
-	err := config.LoadDotEnvSkipEmpty(os.Getenv("ENV_PATH"), "./.env")
+	_, err := config.LoadDotEnv([]string{os.Getenv("ENV_PATH"), "./.env"}, 1)
 	if err != nil {
 		return salesforce.SalesforceClient{}, err
 	}

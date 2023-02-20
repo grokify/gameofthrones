@@ -95,7 +95,7 @@ type Options struct {
 }
 
 func main() {
-	_, err := config.LoadDotEnv()
+	_, err := config.LoadDotEnv([]string{}, 1)
 	logutil.FatalErr(err)
 
 	opts := Options{}

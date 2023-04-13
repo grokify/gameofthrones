@@ -8,7 +8,7 @@ import (
 
 	"github.com/grokify/gameofthrones"
 	"github.com/grokify/go-salesforce/sobjects"
-	"github.com/grokify/goauth/credentials"
+	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/salesforce"
 	"github.com/grokify/mogo/config"
 	"github.com/grokify/mogo/log/logutil"
@@ -139,7 +139,7 @@ func NewSalesforceClientEnv() (salesforce.SalesforceClient, error) {
 	}
 
 	o2Creds := salesforce.OAuth2Credentials{
-		CredentialsOAuth2: credentials.CredentialsOAuth2{
+		CredentialsOAuth2: goauth.CredentialsOAuth2{
 			Endpoint:     salesforce.Endpoint,
 			ClientID:     os.Getenv("SALESFORCE_CLIENT_ID"),
 			ClientSecret: os.Getenv("SALESFORCE_CLIENT_SECRET"),

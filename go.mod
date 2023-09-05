@@ -3,8 +3,8 @@ module github.com/grokify/gameofthrones
 go 1.18
 
 require (
-	github.com/grokify/go-salesforce v0.2.19
-	github.com/grokify/goauth v0.20.1
+	github.com/grokify/go-salesforce v0.2.20
+	github.com/grokify/goauth v0.20.2
 	github.com/grokify/gophonenumbers v0.4.4
 	github.com/grokify/mogo v0.55.0
 	github.com/jessevdk/go-flags v1.5.0
@@ -22,7 +22,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/s2a-go v0.1.5 // indirect
+	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.5 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.0 // indirect

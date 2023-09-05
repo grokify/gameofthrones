@@ -78,8 +78,8 @@ github.com/googleapis/enterprise-certificate-proxy v0.2.5 h1:UR4rDjcgpgEnqpIEvki
 github.com/googleapis/enterprise-certificate-proxy v0.2.5/go.mod h1:RxW0N9901Cko1VOCW3SXCpWP+mlIEkk2tP7jnHy9a3w=
 github.com/googleapis/gax-go/v2 v2.12.0 h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56etFpas=
 github.com/googleapis/gax-go/v2 v2.12.0/go.mod h1:y+aIqrI5eb1YGMVJfuV3185Ts/D7qKpsEkdD5+I6QGU=
-github.com/grokify/go-salesforce v0.2.19 h1:4eGlIr2IpCq1n9Gvymh+4bigPzMSxBYCReoMfjTbhYo=
-github.com/grokify/go-salesforce v0.2.19/go.mod h1:3EFqNl/cAkCzvrMto9f5RsezFu8VssP/FIM7qYz/CMU=
+github.com/grokify/go-salesforce v0.2.20 h1:ifukdlJ7FkdY3ErD0YvV8sWVTf/Lqj6/xZ9OXdjfsVk=
+github.com/grokify/go-salesforce v0.2.20/go.mod h1:hfqEuGC+gyT0yHDPaOlolwDbx6hXny5cHSdPGmg3hBE=
 github.com/grokify/goauth v0.20.1 h1:GvkN8a1z5W7nlYdtqK8uMwyqkStt4wuYrif2wKIr8fc=
 github.com/grokify/goauth v0.20.1/go.mod h1:v+vE9o/YoYwld+kfPaOkCQdnAC95JhMaYDh2jzvhi0I=
 github.com/grokify/gophonenumbers v0.4.4 h1:CNvitVxm2LnQ3VL0HAF4tR8qpauh+hIgDl9QQjr93wM=

@@ -43,7 +43,7 @@ func (pc *PipedriveClient) BuildURL(path string) (string, error) {
 	}
 	v := url.Values{}
 	v.Add("api_token", pc.APIKey)
-	uz, err := urlutil.URLAddQueryValuesString(u.String(), v)
+	uz, err := urlutil.URLStringAddQuery(u.String(), v, false)
 	if err != nil {
 		return "", err
 	}

@@ -5,8 +5,8 @@ go 1.21
 // toolchain go1.21.1
 
 require (
-	github.com/grokify/go-salesforce v0.2.24
-	github.com/grokify/goauth v0.20.6
+	github.com/grokify/go-salesforce v0.2.25
+	github.com/grokify/goauth v0.20.7
 	github.com/grokify/gophonenumbers v0.4.6
 	github.com/grokify/mogo v0.62.3
 	github.com/jessevdk/go-flags v1.5.0

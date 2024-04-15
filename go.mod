@@ -8,7 +8,7 @@ require (
 	github.com/grokify/go-salesforce v0.2.32
 	github.com/grokify/goauth v0.20.13
 	github.com/grokify/gophonenumbers v0.4.7
-	github.com/grokify/mogo v0.63.7
+	github.com/grokify/mogo v0.63.8
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ttacon/libphonenumber v1.2.1
 )
@@ -45,7 +45,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.25.0 // indirect
 	go.opentelemetry.io/otel/trace v1.25.0 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
-	golang.org/x/exp v0.0.0-20240404231335-c0f41cb1a7a0 // indirect
+	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 // indirect
 	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/oauth2 v0.19.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect

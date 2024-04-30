@@ -12,8 +12,7 @@ var charactersDataBytes []byte
 
 func Characters() []Character {
 	var chars []Character
-	r := bytes.NewReader(charactersDataBytes)
-	tbl, err := table.ParseReadSeeker(nil, r)
+	tbl, err := table.ParseReadSeeker(nil, bytes.NewReader(charactersDataBytes))
 	if err != nil {
 		panic(err)
 	}
@@ -21,15 +20,13 @@ func Characters() []Character {
 		if len(row) != 4 {
 			continue
 		}
-		c := NewCharacterSimple(NewCharacterSimpleOpts{
+		chars = append(chars, NewCharacterSimple(NewCharacterSimpleOpts{
 			ActorName:       row[0],
 			GivenName:       row[1],
 			FamilyName:      row[2],
 			NickName:        row[3],
 			AddOrganization: true,
-		})
-
-		chars = append(chars, c)
+		}))
 	}
 	return chars
 }

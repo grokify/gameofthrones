@@ -3,7 +3,6 @@
 [![Build Status][build-status-svg]][build-status-url]
 [![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
-[![SLOC][loc-svg]][repo-url]
 
 This is a set of data from Game of Thrones including characters and organizations.
 

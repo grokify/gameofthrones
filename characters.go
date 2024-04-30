@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
 	"strings"
 
 	"github.com/grokify/goauth/scim"
 	"github.com/grokify/mogo/encoding/csvutil"
+	"github.com/grokify/mogo/os/osutil"
 )
 
 const (
@@ -23,6 +23,45 @@ type Character struct {
 	Actor        scim.User    `json:"actor,omitempty"`
 	Character    scim.User    `json:"character,omitempty"`
 	Organization Organization `json:"organization,omitempty"`
+}
+
+func buildCharacterDisplayName(u scim.User) string {
+	var parts []string
+	if len(u.Name.GivenName) > 0 {
+		parts = append(parts, u.Name.GivenName)
+	}
+	if len(u.NickName) > 0 {
+		parts = append(parts, fmt.Sprintf("\"%v\"", u.NickName))
+	}
+	if len(u.Name.FamilyName) > 0 {
+		parts = append(parts, u.Name.FamilyName)
+	}
+	return strings.Join(parts, " ")
+}
+
+type NewCharacterSimpleOpts struct {
+	ActorName       string
+	GivenName       string
+	FamilyName      string
+	NickName        string
+	AddOrganization bool
+}
+
+func NewCharacterSimple(opts NewCharacterSimpleOpts) Character {
+	c := Character{
+		Actor: scim.User{DisplayName: strings.TrimSpace(opts.ActorName)},
+		Character: scim.User{
+			Name: scim.Name{
+				GivenName:  strings.TrimSpace(opts.GivenName),
+				FamilyName: strings.TrimSpace(opts.FamilyName),
+			},
+			NickName: strings.TrimSpace(opts.NickName),
+		}}
+	c.Character.DisplayName = buildCharacterDisplayName(c.Character)
+	if opts.AddOrganization {
+		c.Organization = GetOrganizationForUser(c.Character)
+	}
+	return c
 }
 
 func (char *Character) Inflate() {
@@ -72,6 +111,7 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 		return chars, err
 	}
 
+	idx := 0
 	for {
 		rec, errx := csv.Read()
 		if errx == io.EOF {
@@ -83,31 +123,17 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 			err = fmt.Errorf("bad data [%v]", rec)
 			break
 		}
-		char := Character{
-			Actor:     scim.User{DisplayName: rec[0]},
-			Character: scim.User{Name: scim.Name{}}}
-		if len(rec) >= 2 {
-			char.Character.Name.GivenName = rec[1]
+		idx++
+		if idx == 1 {
+			continue
 		}
-		if len(rec) >= 3 {
-			char.Character.Name.FamilyName = rec[2]
-		}
-		if len(rec) >= 3 {
-			char.Character.NickName = rec[3]
-		}
-
-		parts := []string{}
-		if len(char.Character.Name.GivenName) > 0 {
-			parts = append(parts, char.Character.Name.GivenName)
-		}
-		if len(char.Character.NickName) > 0 {
-			parts = append(parts, fmt.Sprintf("\"%v\"", char.Character.NickName))
-		}
-		if len(char.Character.Name.FamilyName) > 0 {
-			parts = append(parts, char.Character.Name.FamilyName)
-		}
-
-		char.Character.DisplayName = strings.Join(parts, " ")
+		char := NewCharacterSimple(NewCharacterSimpleOpts{
+			ActorName:       rec[0],
+			GivenName:       rec[1],
+			FamilyName:      rec[2],
+			NickName:        rec[3],
+			AddOrganization: true,
+		})
 
 		chars = append(chars, char)
 	}
@@ -119,9 +145,11 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 }
 
 func GetCharacterPathCSV() string {
-	return path.Join(os.Getenv("GOPATH"), "src", PackagePath, CharactersFileCSV)
+	return osutil.GoPath("src", PackagePath, CharactersFileCSV)
+	// return path.Join(os.Getenv("GOPATH"), "src", PackagePath, CharactersFileCSV)
 }
 
 func GetPackagePath(pathPart string) string {
-	return path.Join(os.Getenv("GOPATH"), "src", PackagePath, pathPart)
+	return osutil.GoPath("src", PackagePath, pathPart)
+	// return path.Join(os.Getenv("GOPATH"), "src", PackagePath, pathPart)
 }

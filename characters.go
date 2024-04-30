@@ -127,15 +127,14 @@ func ReadCharactersPathCSV(filepath string) ([]Character, error) {
 		if idx == 1 {
 			continue
 		}
-		char := NewCharacterSimple(NewCharacterSimpleOpts{
+
+		chars = append(chars, NewCharacterSimple(NewCharacterSimpleOpts{
 			ActorName:       rec[0],
 			GivenName:       rec[1],
 			FamilyName:      rec[2],
 			NickName:        rec[3],
 			AddOrganization: true,
-		})
-
-		chars = append(chars, char)
+		}))
 	}
 	file.Close()
 	if err != nil {

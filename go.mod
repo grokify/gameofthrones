@@ -8,7 +8,7 @@ require (
 	github.com/grokify/go-salesforce v0.2.33
 	github.com/grokify/goauth v0.20.14
 	github.com/grokify/gophonenumbers v0.4.7
-	github.com/grokify/mogo v0.63.9
+	github.com/grokify/mogo v0.63.10
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ttacon/libphonenumber v1.2.1
 )

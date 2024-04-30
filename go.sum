@@ -67,8 +67,8 @@ github.com/grokify/goauth v0.20.14 h1:ndFHcqc6e4xkYfmD9j/4X+AG1MYidCm+DX/7JMOk4Z
 github.com/grokify/goauth v0.20.14/go.mod h1:tbQ58assdF2LnMPreKE0S6324wn/Lomv5tpBY31dFHU=
 github.com/grokify/gophonenumbers v0.4.7 h1:iV9f/UO+Qw2ab8+xF2BK5hRSMqttxYaJGCglJxRbwxw=
 github.com/grokify/gophonenumbers v0.4.7/go.mod h1:Xqd//v9U2vCtXxFW5JittsFfF3JlaNKwWJj4Krhroio=
-github.com/grokify/mogo v0.63.9 h1:yBqez+hW1qRB0Y39ReQe+0ey68txUV5hm/HsV8h3hYY=
-github.com/grokify/mogo v0.63.9/go.mod h1:F0MM5/mXjoykX9ZLjGGL/HHWZz5xPcDk03jQgWWnmjY=
+github.com/grokify/mogo v0.63.10 h1:E12zZXTehbl/2ejwZRlE9VpE0b75KlF3HIlasjyvgDs=
+github.com/grokify/mogo v0.63.10/go.mod h1:qqEBSGkFlK3gpeBT4OOgXu48ZJYfzCrd+BNLs4CGF8A=
 github.com/huandu/xstrings v1.4.0 h1:D17IlohoQq4UcpqD7fDk80P7l+lwAmlFaBHgOipl2FU=
 github.com/huandu/xstrings v1.4.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/jessevdk/go-flags v1.5.0 h1:1jKYvbxEjfUl0fmqTCOfonvskHHXMjBySTLW4y9LFvc=

@@ -10,7 +10,7 @@ require (
 	github.com/grokify/gocharts/v2 v2.18.6
 	github.com/grokify/gophonenumbers v0.4.8
 	github.com/grokify/mogo v0.63.10
-	github.com/jessevdk/go-flags v1.5.0
+	github.com/jessevdk/go-flags v1.6.1
 	github.com/ttacon/libphonenumber v1.2.1
 )
 
@@ -58,7 +58,7 @@ require (
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/oauth2 v0.19.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/api v0.176.1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240429193739-8cf5692501f6 // indirect

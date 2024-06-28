@@ -1,5 +1,6 @@
 package gameofthrones
 
+/*
 import (
 	"bytes"
 	_ "embed"
@@ -12,7 +13,9 @@ var charactersDataBytes []byte
 
 func Characters() []Character {
 	var chars []Character
-	tbl, err := table.ParseReadSeeker(nil, bytes.NewReader(charactersDataBytes))
+	tbl, err := table.ParseReadSeeker(&table.ParseOptions{
+		TrimSpace: true,
+	}, bytes.NewReader(charactersDataBytes))
 	if err != nil {
 		panic(err)
 	}
@@ -30,3 +33,4 @@ func Characters() []Character {
 	}
 	return chars
 }
+*/

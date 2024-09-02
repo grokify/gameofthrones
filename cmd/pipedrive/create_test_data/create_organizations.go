@@ -123,8 +123,7 @@ func main() {
 			// break
 		}
 	case "create_orgs":
-		chars, err := gameofthrones.ReadCharacters()
-		logutil.FatalErr(err)
+		chars := gameofthrones.Characters()
 		for _, char := range chars {
 			fmtutil.MustPrintJSON(char)
 			resp, err := pc.CreatePerson(RequestBody{Name: char.Character.DisplayName})

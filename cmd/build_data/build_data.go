@@ -114,8 +114,7 @@ func main() {
 		err = json.Unmarshal(bytes, &chars)
 		logutil.FatalErr(err)
 	} else {
-		chars, err = gameofthrones.ReadCharactersCSV()
-		logutil.FatalErr(err)
+		chars = gameofthrones.Characters()
 	}
 
 	chars, err = addPhoneNumbers(chars)

@@ -74,12 +74,7 @@ func GetDemoCharacters() (DemoCharacters, error) {
 		}
 	}
 
-	chars, err := ReadCharactersCSV()
-	if err != nil {
-		return demoChars, err
-	}
-
-	demoChars.LoadCharacters(chars)
+	demoChars.LoadCharacters(Characters())
 
 	for _, char := range demoChars.CharactersSorted() {
 		dispName := strings.TrimSpace(char.Character.DisplayName)

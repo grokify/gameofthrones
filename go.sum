@@ -63,8 +63,8 @@ github.com/googleapis/enterprise-certificate-proxy v0.3.4 h1:XYIDZApgAnrN1c855gT
 github.com/googleapis/enterprise-certificate-proxy v0.3.4/go.mod h1:YKe7cfqYXjKGpGvmSg28/fFvhNzinZQm8DGnaburhGA=
 github.com/googleapis/gax-go/v2 v2.13.0 h1:yitjD5f7jQHhyDsnhKEBU52NdvvdSeGzlAnDPT0hH1s=
 github.com/googleapis/gax-go/v2 v2.13.0/go.mod h1:Z/fvTZXF8/uw7Xu5GuslPw+bplx6SS338j1Is2S+B7A=
-github.com/grokify/go-salesforce v0.2.44 h1:csNjvE27bF359R+SmtsK2iQnhFKgT4BUjMtbGOHsCg8=
-github.com/grokify/go-salesforce v0.2.44/go.mod h1:JBQQHuxB6IB3e/pdCjHX7vEWV7R4QYnSb1d8RNSGx6o=
+github.com/grokify/go-salesforce v0.2.47 h1:2IfSm8IXdzKwkvO106z+pTp5jmq43tzEcoEhmyF827E=
+github.com/grokify/go-salesforce v0.2.47/go.mod h1:nMHikLzP4P4RSkBP9g2z3WvpHym5Rar52VMCeaBoNec=
 github.com/grokify/goauth v0.22.1 h1:2RdMW3g1o47Xf/HDrtGa/oNCWLrQTFpD0A/lTMTchT4=
 github.com/grokify/goauth v0.22.1/go.mod h1:e/3Iap/2RAWe1CuI1mpdYgKLKu1Byzs3mPNKGEJxru4=
 github.com/grokify/gocharts/v2 v2.21.0 h1:XjVFV85Gn24aZ3+zHzeITIGwNWd3Llni029k/TvYA2g=

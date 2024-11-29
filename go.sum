@@ -71,8 +71,8 @@ github.com/grokify/gocharts/v2 v2.21.0 h1:XjVFV85Gn24aZ3+zHzeITIGwNWd3Llni029k/T
 github.com/grokify/gocharts/v2 v2.21.0/go.mod h1:TWe3yGhjo9xyPBBDhbdDobzdyvaLgRXcPFnGmZZxP8A=
 github.com/grokify/gophonenumbers v0.4.10 h1:cET8vq8qpNaMaxBzSvwTVtY/aiiwwTRf1li7rKLmxKk=
 github.com/grokify/gophonenumbers v0.4.10/go.mod h1:6TgY44dShR6uMvUfztxpx995ZkotsgxN5CUXR9NNwEQ=
-github.com/grokify/mogo v0.65.5 h1:ifDwXUQNeFIi27sKk2kp/TYiseo2imMuVbPGA/zBGjM=
-github.com/grokify/mogo v0.65.5/go.mod h1:q0uXqdhW6F4VJZ5iTJqi34GMewjZr6Q48ZbAigBYfpQ=
+github.com/grokify/mogo v0.65.7 h1:XcCm4D/WienTv0yTFnyLNaJP3F7YfGS9LTmpuSXSgGc=
+github.com/grokify/mogo v0.65.7/go.mod h1:npug5+hF1jiAxt8MNWvwU8f+K39Dwp71gJv3lxsIAkM=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
 github.com/huandu/xstrings v1.5.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/jessevdk/go-flags v1.6.1 h1:Cvu5U8UGrLay1rZfv/zP7iLpSHGUZ/Ou68T0iX1bBK4=

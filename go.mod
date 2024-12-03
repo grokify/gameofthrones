@@ -5,11 +5,11 @@ go 1.22.6
 toolchain go1.23.0
 
 require (
-	github.com/grokify/go-salesforce v0.2.47
+	github.com/grokify/go-salesforce v0.2.48
 	github.com/grokify/goauth v0.22.1
 	github.com/grokify/gocharts/v2 v2.21.0
 	github.com/grokify/gophonenumbers v0.4.10
-	github.com/grokify/mogo v0.65.5
+	github.com/grokify/mogo v0.66.0
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/ttacon/libphonenumber v1.2.1
 )

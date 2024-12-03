@@ -67,12 +67,12 @@ github.com/grokify/go-salesforce v0.2.47 h1:2IfSm8IXdzKwkvO106z+pTp5jmq43tzEcoEh
 github.com/grokify/go-salesforce v0.2.47/go.mod h1:nMHikLzP4P4RSkBP9g2z3WvpHym5Rar52VMCeaBoNec=
 github.com/grokify/goauth v0.22.1 h1:2RdMW3g1o47Xf/HDrtGa/oNCWLrQTFpD0A/lTMTchT4=
 github.com/grokify/goauth v0.22.1/go.mod h1:e/3Iap/2RAWe1CuI1mpdYgKLKu1Byzs3mPNKGEJxru4=
-github.com/grokify/gocharts/v2 v2.21.0 h1:XjVFV85Gn24aZ3+zHzeITIGwNWd3Llni029k/TvYA2g=
-github.com/grokify/gocharts/v2 v2.21.0/go.mod h1:TWe3yGhjo9xyPBBDhbdDobzdyvaLgRXcPFnGmZZxP8A=
+github.com/grokify/gocharts/v2 v2.21.1 h1:G2MJSOVhU+Zp7t4GtIHK2Q6OehsQC3eBwqVNdn9P1us=
+github.com/grokify/gocharts/v2 v2.21.1/go.mod h1:thA3ZSYHWtlrf7soeTZi8IsUi6cFYw9t37+n20HwYXY=
 github.com/grokify/gophonenumbers v0.4.10 h1:cET8vq8qpNaMaxBzSvwTVtY/aiiwwTRf1li7rKLmxKk=
 github.com/grokify/gophonenumbers v0.4.10/go.mod h1:6TgY44dShR6uMvUfztxpx995ZkotsgxN5CUXR9NNwEQ=
-github.com/grokify/mogo v0.65.5 h1:ifDwXUQNeFIi27sKk2kp/TYiseo2imMuVbPGA/zBGjM=
-github.com/grokify/mogo v0.65.5/go.mod h1:q0uXqdhW6F4VJZ5iTJqi34GMewjZr6Q48ZbAigBYfpQ=
+github.com/grokify/mogo v0.66.0 h1:lWsbVYM0oJUpuMfA4mdJp+c2k1aRlLky34b2T7l/ehU=
+github.com/grokify/mogo v0.66.0/go.mod h1:npug5+hF1jiAxt8MNWvwU8f+K39Dwp71gJv3lxsIAkM=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
 github.com/huandu/xstrings v1.5.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/jessevdk/go-flags v1.6.1 h1:Cvu5U8UGrLay1rZfv/zP7iLpSHGUZ/Ou68T0iX1bBK4=

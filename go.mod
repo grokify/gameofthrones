@@ -1,13 +1,12 @@
 module github.com/grokify/gameofthrones
 
-go 1.22.6
-toolchain go1.23.6
+go 1.23.6
 
 require (
 	github.com/grokify/go-salesforce v0.2.54
-	github.com/grokify/goauth v0.23.3
+	github.com/grokify/goauth v0.23.5
 	github.com/grokify/gocharts/v2 v2.22.0
-	github.com/grokify/gophonenumbers v0.4.10
+	github.com/grokify/gophonenumbers v0.5.0
 	github.com/grokify/mogo v0.67.9
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/ttacon/libphonenumber v1.2.1
@@ -37,7 +36,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
-	github.com/nyaruka/phonenumbers v1.4.0 // indirect
+	github.com/nyaruka/phonenumbers v1.5.0 // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.4 // indirect
 	github.com/ttacon/builder v0.0.0-20170518171403-c099f663e1c2 // indirect

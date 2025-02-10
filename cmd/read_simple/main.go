@@ -9,7 +9,7 @@ import (
 
 func main() {
 	chars := gameofthrones.Characters()
-	fmtutil.PrintJSON(chars)
-	fmtutil.PrintJSON(chars[0])
+	fmtutil.MustPrintJSON(chars)
+	fmtutil.MustPrintJSON(chars[0])
 	fmt.Println("DONE")
 }

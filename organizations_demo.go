@@ -9,6 +9,16 @@ import (
 	"github.com/grokify/mogo/strconv/phonenumber"
 )
 
+const (
+	// areaCodeStride is the step size when assigning area codes to organizations.
+	// This spreads organizations across different geographic regions.
+	areaCodeStride = 9
+
+	// phoneNumberStart is the starting local number suffix for generated phone numbers.
+	phoneNumberStart = 100
+)
+
+// DemoOrganization represents a Game of Thrones organization with demo contact data.
 type DemoOrganization struct {
 	Name     string
 	AreaCode uint16
@@ -16,6 +26,7 @@ type DemoOrganization struct {
 	Domain   string
 }
 
+// E164 returns the organization's phone number in E.164 format (e.g., "+14155551234").
 func (oa *DemoOrganization) E164() string {
 	if oa.Phone > 0 {
 		return fmt.Sprintf("+%v", oa.Phone)
@@ -23,10 +34,13 @@ func (oa *DemoOrganization) E164() string {
 	return ""
 }
 
+// DemoOrganizations holds a map of organization names to their demo data.
 type DemoOrganizations struct {
 	OrganizationsMap map[string]DemoOrganization
 }
 
+// GetDemoOrganizations returns all organizations with generated demo data including
+// area codes, phone numbers, and domain names.
 func GetDemoOrganizations() (DemoOrganizations, error) {
 	demoOrgs := DemoOrganizations{OrganizationsMap: map[string]DemoOrganization{}}
 	a2g := gophonenumbers.NewAreaCodeToGeo()
@@ -48,17 +62,16 @@ func GetDemoOrganizations() (DemoOrganizations, error) {
 	fng := phonenumber.NewFakeNumberGenerator(acs)
 
 	for i, orgName := range orgs {
-		j := i * 9
+		j := i * areaCodeStride
 		if j >= len(acs) {
-			panic("A")
+			panic("area code index out of bounds: not enough area codes for organizations")
 		}
 		ac := acs[j]
-		fmt.Printf("%v %v %v\n", i, orgName, ac)
 
 		demoOrg := DemoOrganization{
 			Name:     orgName,
 			AreaCode: ac,
-			Phone:    fng.LocalNumberUS(ac, uint16(100)),
+			Phone:    fng.LocalNumberUS(ac, phoneNumberStart),
 		}
 		domainPart := urlutil.ToSlugLowerString(orgName)
 		if _, ok := orgDomains[orgName]; ok {

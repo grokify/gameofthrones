@@ -18,8 +18,12 @@ const (
 	PackagePath            = "github.com/grokify/gameofthrones"
 	CharactersFileCSV      = "characters.csv"
 	CharactersFilepathJSON = "examples/build_data/characters_out_inflated.json"
+
+	// csvColumnCount is the expected number of columns in the characters CSV.
+	csvColumnCount = 4
 )
 
+// Character represents a Game of Thrones character with actor and character information.
 type Character struct {
 	Actor        scim.User    `json:"actor,omitempty"`
 	Character    scim.User    `json:"character,omitempty"`
@@ -40,6 +44,7 @@ func buildCharacterDisplayName(u scim.User) string {
 	return strings.Join(parts, " ")
 }
 
+// NewCharacterSimpleOpts contains options for creating a Character.
 type NewCharacterSimpleOpts struct {
 	ActorName       string
 	GivenName       string
@@ -48,6 +53,7 @@ type NewCharacterSimpleOpts struct {
 	AddOrganization bool
 }
 
+// NewCharacterSimple creates a Character from the provided options.
 func NewCharacterSimple(opts NewCharacterSimpleOpts) Character {
 	c := Character{
 		Actor: scim.User{DisplayName: strings.TrimSpace(opts.ActorName)},
@@ -65,10 +71,13 @@ func NewCharacterSimple(opts NewCharacterSimpleOpts) Character {
 	return c
 }
 
+// Inflate populates the Character's Organization based on their family name.
 func (char *Character) Inflate() {
 	char.Organization = GetOrganizationForUser(char.Character)
 }
 
+// ReadCharactersJSON reads characters from a JSON file. If no path is provided,
+// it reads from the default CharactersFilepathJSON location.
 func ReadCharactersJSON(filepaths ...string) ([]Character, error) {
 	switch len(filepaths) {
 	case 0:
@@ -80,6 +89,7 @@ func ReadCharactersJSON(filepaths ...string) ([]Character, error) {
 	}
 }
 
+// ReadCharactersPathJSON reads characters from the specified JSON file path.
 func ReadCharactersPathJSON(filepath string) ([]Character, error) {
 	chars := []Character{}
 	bytes, err := os.ReadFile(filepath)
@@ -90,66 +100,7 @@ func ReadCharactersPathJSON(filepath string) ([]Character, error) {
 	return chars, err
 }
 
-/*
-func ReadCharactersCSV(filepaths ...string) ([]Character, error) {
-	switch len(filepaths) {
-	case 0:
-		return ReadCharactersPathCSV(GetCharacterPathCSV())
-	case 1:
-		return ReadCharactersPathCSV(filepaths[0])
-	default:
-		return []Character{}, errors.New("too many file paths, only 0 or 1 allowed")
-	}
-}
-
-func ReadCharacters() ([]Character, error) {
-	return ReadCharactersPathCSV(GetCharacterPathCSV())
-}
-
-func ReadCharactersPathCSV(filepath string) ([]Character, error) {
-	chars := []Character{}
-	csv, file, err := csvutil.NewReaderFile(filepath, ',')
-	if err != nil {
-		return chars, err
-	}
-
-	idx := 0
-	for {
-		rec, errx := csv.Read()
-		if errx == io.EOF {
-			break
-		} else if errx != nil {
-			err = errx
-			break
-		} else if len(rec) < 2 {
-			err = fmt.Errorf("bad data [%v]", rec)
-			break
-		}
-		idx++
-		if idx == 1 {
-			continue
-		}
-		chars = append(chars, NewCharacterSimple(NewCharacterSimpleOpts{
-			ActorName:       rec[0],
-			GivenName:       rec[1],
-			FamilyName:      rec[2],
-			NickName:        rec[3],
-			AddOrganization: true,
-		}))
-	}
-	file.Close()
-	if err != nil {
-		return chars, err
-	}
-	return chars, nil
-}
-
-func GetCharacterPathCSV() string {
-	return osutil.GoPath("src", PackagePath, CharactersFileCSV)
-	// return path.Join(os.Getenv("GOPATH"), "src", PackagePath, CharactersFileCSV)
-}
-*/
-
+// GetPackagePath returns the full path to a file within the package directory.
 func GetPackagePath(pathPart string) string {
 	return osutil.GoPath("src", PackagePath, pathPart)
 	// return path.Join(os.Getenv("GOPATH"), "src", PackagePath, pathPart)
@@ -158,16 +109,19 @@ func GetPackagePath(pathPart string) string {
 //go:embed characters.csv
 var charactersDataBytes []byte
 
+// Characters returns all Game of Thrones characters from the embedded CSV data.
+// This function panics if the embedded data cannot be parsed, which indicates
+// a build-time error that should never occur in normal operation.
 func Characters() []Character {
 	var chars []Character
 	tbl, err := table.ParseReadSeeker(&table.ParseOptions{
 		TrimSpace: true,
 	}, bytes.NewReader(charactersDataBytes))
 	if err != nil {
-		panic(err)
+		panic("failed to parse embedded characters CSV: " + err.Error())
 	}
 	for _, row := range tbl.Rows {
-		if len(row) != 4 {
+		if len(row) != csvColumnCount {
 			continue
 		}
 		chars = append(chars, NewCharacterSimple(NewCharacterSimpleOpts{

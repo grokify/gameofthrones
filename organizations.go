@@ -4,6 +4,7 @@ import (
 	"github.com/grokify/goauth/scim"
 )
 
+// Organizations is a list of all Game of Thrones organizations (houses, groups, locations).
 var Organizations = []string{
 	"Baelish Keep",
 	"Bear Island",
@@ -37,6 +38,7 @@ var Organizations = []string{
 	"Westeros",
 	"Winterfell"}
 
+// FamilyNameToOrganization maps character family names to their affiliated organization.
 var FamilyNameToOrganization = map[string]string{
 	"of Myr":     "Myr",
 	"of Tarth":   "Tarth",
@@ -82,16 +84,17 @@ var FamilyNameToOrganization = map[string]string{
 	"Yarwyck":    "Night's Watch",
 }
 
-// Schema.org Organization
+// Organization represents a Game of Thrones organization using Schema.org structure.
 type Organization struct {
 	Thing
 }
 
-// Schema.org Thing
+// Thing represents a Schema.org Thing with a name.
 type Thing struct {
 	Name string `json:"name,omitempty"`
 }
 
+// GetOrganizationForUser returns the organization for a user based on their family name.
 func GetOrganizationForUser(user scim.User) Organization {
 	familyName := user.Name.FamilyName
 	org := Organization{Thing: Thing{}}

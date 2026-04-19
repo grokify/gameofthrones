@@ -11,16 +11,24 @@ import (
 	"github.com/grokify/mogo/strconv/phonenumber"
 )
 
+const (
+	// defaultFallbackDomain is used for characters without an organization domain.
+	defaultFallbackDomain = "westeros.com"
+)
+
+// DemoCharacters holds a map of character display names to their full Character data.
 type DemoCharacters struct {
 	CharactersMap map[string]Character
 }
 
+// LoadCharacters populates the map from a slice of Characters.
 func (dc *DemoCharacters) LoadCharacters(chars []Character) {
 	for _, char := range chars {
 		dc.CharactersMap[char.Character.DisplayName] = char
 	}
 }
 
+// NamesSorted returns character display names in alphabetical order.
 func (dc *DemoCharacters) NamesSorted() []string {
 	names := []string{}
 	for name := range dc.CharactersMap {
@@ -30,6 +38,7 @@ func (dc *DemoCharacters) NamesSorted() []string {
 	return names
 }
 
+// CharactersSorted returns characters sorted by display name.
 func (dc *DemoCharacters) CharactersSorted() []Character {
 	names := dc.NamesSorted()
 	chars := []Character{}
@@ -41,6 +50,8 @@ func (dc *DemoCharacters) CharactersSorted() []Character {
 	return chars
 }
 
+// GetDemoCharacters returns all characters with generated demo data including
+// email addresses and phone numbers based on their organization affiliations.
 func GetDemoCharacters() (DemoCharacters, error) {
 	demoChars := DemoCharacters{CharactersMap: map[string]Character{}}
 	a2g := gophonenumbers.NewAreaCodeToGeo()
@@ -49,11 +60,11 @@ func GetDemoCharacters() (DemoCharacters, error) {
 		return demoChars, err
 	}
 	fng := gophonenumbers.NewFakeNumberGenerator(a2g.AreaCodes())
-	unique := map[uint64]int8{}
-	acsOrgs := map[uint16]int8{}
+	unique := map[uint64]int8{} // uses int8 for compatibility with gophonenumbers API
+	acsOrgs := map[uint16]struct{}{}
 	acsOther := []uint16{}
 
-	aci := phonenumber.NewAreaCodeIncrementor(100)
+	aci := phonenumber.NewAreaCodeIncrementor(phoneNumberStart)
 
 	demoOrgs, err := GetDemoOrganizations()
 	if err != nil {
@@ -62,10 +73,10 @@ func GetDemoCharacters() (DemoCharacters, error) {
 
 	for _, demoOrg := range demoOrgs.OrganizationsMap {
 		if demoOrg.Phone > 0 {
-			unique[demoOrg.Phone] = int8(1)
+			unique[demoOrg.Phone] = 1
 		}
 		if demoOrg.AreaCode > 0 {
-			acsOrgs[demoOrg.AreaCode] = int8(1)
+			acsOrgs[demoOrg.AreaCode] = struct{}{}
 		}
 	}
 	for _, ac := range a2g.AreaCodes() {
@@ -110,7 +121,7 @@ func GetDemoCharacters() (DemoCharacters, error) {
 			}
 		}
 		if len(char.Character.Emails) == 0 {
-			email := fmt.Sprintf("%v@westeros.com", slug)
+			email := fmt.Sprintf("%v@%s", slug, defaultFallbackDomain)
 			char.Character.Emails = append(
 				char.Character.Emails,
 				scim.Item{Value: email})

@@ -1,0 +1,232 @@
+{
+  "irVersion": "1.0",
+  "project": "gameofthrones",
+  "repository": "https://github.com/grokify/gameofthrones",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.5.0",
+      "date": "2026-04-19",
+      "highlights": [
+        { "description": "Unified Cobra CLI (`got`) replacing 5 separate command binaries" },
+        { "description": "Comprehensive unit tests for characters, organizations, and demo data generation" }
+      ],
+      "breaking": [
+        { "description": "CLI commands moved from separate binaries to unified `got` command. Install with: `go install github.com/grokify/gameofthrones/cmd/got@latest`", "commit": "527d82e" }
+      ],
+      "added": [
+        { "description": "`got` CLI with Cobra for unified command interface", "commit": "527d82e" },
+        { "description": "`got show characters` command with `--query` and `--format` flags", "commit": "527d82e" },
+        { "description": "`got show organizations` command with `--query` and `--format` flags", "commit": "527d82e" },
+        { "description": "`got salesforce` subcommands: create-accounts, create-contacts, create-cases, delete-accounts, delete-contacts", "commit": "527d82e" },
+        { "description": "`got pipedrive` subcommands: create-orgs, create-people, get-persons, get-org-fields", "commit": "527d82e" },
+        { "description": "`got ringcentral build` command with `--output`, `--pretty`, and `--from-file` flags", "commit": "527d82e" },
+        { "description": "GoDoc comments for all exported types and functions", "commit": "22bb9b7" },
+        { "description": "Named constants: `csvColumnCount`, `areaCodeStride`, `phoneNumberStart`, `defaultFallbackDomain`", "commit": "22bb9b7" }
+      ],
+      "changed": [
+        { "description": "Improved panic messages with descriptive context", "commit": "22bb9b7" },
+        { "description": "Use empty struct for set membership in `acsOrgs` map (zero memory)", "commit": "22bb9b7" },
+        { "description": "Salesforce screenshots moved to `docs/images/salesforce/`", "commit": "432522d" }
+      ],
+      "removed": [
+        { "description": "`cmd/build_data/` directory (replaced by `got ringcentral build`)", "commit": "527d82e" },
+        { "description": "`cmd/pipedrive/` directory (replaced by `got pipedrive`)", "commit": "527d82e" },
+        { "description": "`cmd/salesforce/` directory (replaced by `got salesforce`)", "commit": "527d82e" },
+        { "description": "`cmd/read_simple/` directory (replaced by `got show characters`)", "commit": "527d82e" },
+        { "description": "`cmd/test_numbers/` directory (converted to unit tests)", "commit": "527d82e" },
+        { "description": "~60 lines of commented-out dead code in `characters.go`", "commit": "22bb9b7" }
+      ],
+      "tests": [
+        { "description": "`TestCharacters`: verify embedded CSV loads correctly", "commit": "3182643" },
+        { "description": "`TestNewCharacterSimple`: test character creation with options", "commit": "3182643" },
+        { "description": "`TestGetOrganizationForUser`: test family name to organization mapping", "commit": "3182643" },
+        { "description": "`TestOrganizations`: verify organization list is populated", "commit": "3182643" },
+        { "description": "`TestGetDemoOrganizations`: verify area codes and phone generation", "commit": "3182643" },
+        { "description": "`TestGetDemoCharacters`: verify unique phone numbers and emails", "commit": "3182643" },
+        { "description": "`TestDemoCharactersNamesSorted`: verify alphabetical sorting", "commit": "3182643" }
+      ],
+      "documentation": [
+        { "description": "Expanded README with CLI Tool section and installation instructions", "commit": "4bf997f" },
+        { "description": "Added library usage examples for characters, organizations, and demo data", "commit": "4bf997f" },
+        { "description": "Updated CRM integration sections for new CLI commands", "commit": "4bf997f" },
+        { "description": "Added data reference tables for organizations and family mappings", "commit": "4bf997f" }
+      ],
+      "dependencies": [
+        { "description": "Add `github.com/spf13/cobra` v1.10.2 for CLI framework", "commit": "527d82e" }
+      ]
+    },
+    {
+      "version": "v0.4.0",
+      "date": "2025-02-10",
+      "added": [
+        { "description": "golangci-lint badge to README", "commit": "a4adfbd" }
+      ],
+      "fixed": [
+        { "description": "Lint errors: unchecked error return values in cmd packages", "commit": "487ecf7" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/grokify/goauth` to v0.23.3", "commit": "e6e53c5" },
+        { "description": "Update `github.com/grokify/go-salesforce` to v0.2.47", "commit": "fa115f9" },
+        { "description": "Update `github.com/grokify/gocharts/v2` to v2.21.0", "commit": "0149db4" }
+      ]
+    },
+    {
+      "version": "v0.3.0",
+      "date": "2024-04-30",
+      "highlights": [
+        { "description": "Embedded CSV data with `Characters()` function - no external file dependencies" }
+      ],
+      "added": [
+        { "description": "`Characters()` function returning all characters from embedded CSV data", "commit": "dc05f27" },
+        { "description": "Embedded `characters.csv` using Go's `//go:embed` directive", "commit": "dc05f27" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/grokify/mogo` to v0.63.10", "commit": "959df85" }
+      ],
+      "infrastructure": [
+        { "description": "Update golangci-lint-action to v5", "commit": "6802a90" }
+      ]
+    },
+    {
+      "version": "v0.2.7",
+      "date": "2024-03-18",
+      "changed": [
+        { "description": "Update Go version in go.mod", "commit": "3570ccb" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/grokify/goauth` to v0.20.8", "commit": "2a16b0c" },
+        { "description": "Update `github.com/grokify/mogo` to v0.62.5", "commit": "18e3b9d" }
+      ],
+      "infrastructure": [
+        { "description": "Update golangci-lint-action to v4", "commit": "d784b03" }
+      ]
+    },
+    {
+      "version": "v0.2.6",
+      "date": "2023-11-13",
+      "dependencies": [
+        { "description": "Update `github.com/grokify/mogo` to v0.60.1", "commit": "08c9ac6" },
+        { "description": "Update `github.com/grokify/go-salesforce` to v0.2.22", "commit": "8528d95" },
+        { "description": "Update `github.com/grokify/gophonenumbers` to v0.4.5", "commit": "3b3cb2e" }
+      ],
+      "infrastructure": [
+        { "description": "Update Go test versions in CI", "commit": "14afd5e" }
+      ]
+    },
+    {
+      "version": "v0.2.5",
+      "date": "2023-04-12",
+      "changed": [
+        { "description": "Disable golangci-lint due to `typecheck` false positives (golangci/golangci-lint#2912)", "commit": "a6f72d8" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/grokify/mogo` to v0.48.0", "commit": "43f5bf7" }
+      ]
+    },
+    {
+      "version": "v0.2.4",
+      "date": "2023-02-20",
+      "dependencies": [
+        { "description": "Update Go modules", "commit": "046c77d" }
+      ],
+      "infrastructure": [
+        { "description": "Add Go v1.20.x to CI test matrix", "commit": "a713c95" }
+      ]
+    },
+    {
+      "version": "v0.2.3",
+      "date": "2023-01-14",
+      "documentation": [
+        { "description": "Update README links", "commit": "c09bd7d" },
+        { "description": "Update build shield link", "commit": "7ff3192" }
+      ],
+      "dependencies": [
+        { "description": "Update Go modules", "commit": "366c7a6" }
+      ]
+    },
+    {
+      "version": "v0.2.2",
+      "date": "2022-11-14",
+      "dependencies": [
+        { "description": "Update `github.com/grokify/goauth` to v0.16.5", "commit": "e819c65" },
+        { "description": "Update `github.com/grokify/mogo` to v0.40.5", "commit": "cc40b2b" }
+      ],
+      "infrastructure": [
+        { "description": "Update actions/checkout to v3", "commit": "acfe279" }
+      ]
+    },
+    {
+      "version": "v0.2.1",
+      "date": "2022-08-22",
+      "dependencies": [
+        { "description": "Update `github.com/grokify/go-salesforce` to v0.2.5", "commit": "4deb7bd" },
+        { "description": "Update `github.com/grokify/goauth` to v0.14.4", "commit": "d0d09a4" },
+        { "description": "Update `github.com/grokify/mogo`", "commit": "4f7fab5" }
+      ],
+      "infrastructure": [
+        { "description": "Update Go versions in CI", "commit": "4deb7bd" }
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2022-04-25",
+      "added": [
+        { "description": "README badges for CI, lint, Go Report Card, and pkg.go.dev", "commit": "e36caf2" }
+      ],
+      "fixed": [
+        { "description": "Various golangci-lint issues", "commit": "390096f" }
+      ]
+    },
+    {
+      "version": "v0.1.2",
+      "date": "2022-04-20",
+      "added": [
+        { "description": "Dependabot configuration for Go modules and GitHub Actions", "commit": "bfe43dc" },
+        { "description": "golangci-lint configuration", "commit": "b35b4ea" }
+      ],
+      "fixed": [
+        { "description": "Various golangci-lint issues", "commit": "6d298cd" }
+      ],
+      "infrastructure": [
+        { "description": "Add Go v1.18 to CI test matrix", "commit": "2e39971" },
+        { "description": "Update actions/setup-go to v3", "commit": "e1892ab" }
+      ]
+    },
+    {
+      "version": "v0.1.1",
+      "date": "2022-03-01",
+      "changed": [
+        { "description": "Rename `examples/` directory to `cmd/`", "commit": "c5c4063" }
+      ],
+      "dependencies": [
+        { "description": "Update Go modules", "commit": "2909f17" }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2021-09-24",
+      "highlights": [
+        { "description": "Initial release with Game of Thrones character and organization data" }
+      ],
+      "added": [
+        { "description": "85 Game of Thrones characters from TV series with actor names", "commit": "1e21f1c" },
+        { "description": "31 organizations (houses, groups, locations) with family name mappings", "commit": "9744163" },
+        { "description": "Demo data generation with fictitious phone numbers and email addresses", "commit": "99cf2df" },
+        { "description": "Salesforce CRM integration for creating Accounts, Contacts, and Cases", "commit": "03c98b5" },
+        { "description": "Pipedrive CRM integration for creating Organizations and Persons", "commit": "ff0f606" },
+        { "description": "RingCentral Embeddable Voice contact data export", "commit": "5d9c42c" },
+        { "description": "SCIM-compatible user format using `goauth/scim` types", "commit": "b177147" }
+      ],
+      "documentation": [
+        { "description": "Salesforce integration guide with screenshots", "commit": "99cf2df" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions CI workflow", "commit": "cc71679" },
+        { "description": "Go modules initialization", "commit": "5ebad67" }
+      ]
+    }
+  ]
+}

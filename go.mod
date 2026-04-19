@@ -6,7 +6,7 @@ require (
 	github.com/grokify/go-salesforce v0.2.80
 	github.com/grokify/goauth v0.23.29
 	github.com/grokify/gocharts/v2 v2.27.0
-	github.com/grokify/gophonenumbers v0.6.0
+	github.com/grokify/gophonenumbers v0.6.2
 	github.com/grokify/mogo v0.74.1
 	github.com/spf13/cobra v1.10.2
 	github.com/ttacon/libphonenumber v1.2.1
@@ -52,7 +52,7 @@ require (
 	github.com/olekukonko/tablewriter v1.1.4 // indirect
 	github.com/richardlehane/mscfb v1.0.6 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
-	github.com/spf13/pflag v1.0.9 // indirect
+	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tiendc/go-deepcopy v1.7.2 // indirect
 	github.com/ttacon/builder v0.0.0-20170518171403-c099f663e1c2 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

@@ -6,9 +6,8 @@ require (
 	github.com/grokify/go-salesforce v0.2.80
 	github.com/grokify/goauth v0.23.29
 	github.com/grokify/gocharts/v2 v2.27.0
-	github.com/grokify/gophonenumbers v0.5.2
+	github.com/grokify/gophonenumbers v0.6.0
 	github.com/grokify/mogo v0.74.1
-	github.com/jessevdk/go-flags v1.6.1
 	github.com/spf13/cobra v1.10.2
 	github.com/ttacon/libphonenumber v1.2.1
 )
@@ -35,6 +34,7 @@ require (
 	github.com/googleapis/gax-go/v2 v2.22.0 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/jessevdk/go-flags v1.6.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kellydunn/golang-geo v0.7.0 // indirect

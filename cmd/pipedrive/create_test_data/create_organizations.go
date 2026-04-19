@@ -55,7 +55,7 @@ func (pc *PipedriveClient) GetOrganizationFields() (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	return pc.ClientMore.Client.Get(apiURL)
+	return pc.ClientMore.Client.Get(apiURL) //nolint:gosec // G704: URL constructed from trusted constants
 }
 
 func (pc *PipedriveClient) GetPersons() (*http.Response, error) {
@@ -63,7 +63,7 @@ func (pc *PipedriveClient) GetPersons() (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	return pc.ClientMore.Client.Get(apiURL)
+	return pc.ClientMore.Client.Get(apiURL) //nolint:gosec // G704: URL constructed from trusted constants
 }
 
 func (pc *PipedriveClient) CreateOrganization(reqBody RequestBody) (*http.Response, error) {

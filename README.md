@@ -8,22 +8,22 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/grokify/agent-protocols/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/grokify/agent-protocols/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/grokify/agent-protocols/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/grokify/agent-protocols/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/grokify/agent-protocols/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/grokify/agent-protocols/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/agent-protocols
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/agent-protocols
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/agent-protocols
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/agent-protocols
+ [go-ci-svg]: https://github.com/grokify/gameofthrones/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/gameofthrones/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/gameofthrones/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/gameofthrones/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/gameofthrones/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/gameofthrones/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/gameofthrones
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/gameofthrones
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/gameofthrones
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/gameofthrones
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fagent-protocols
- [loc-svg]: https://tokei.rs/b1/github/grokify/agent-protocols
- [repo-url]: https://github.com/grokify/agent-protocols
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fgameofthrones
+ [loc-svg]: https://tokei.rs/b1/github/grokify/gameofthrones
+ [repo-url]: https://github.com/grokify/gameofthrones
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/agent-protocols/blob/master/LICENSE
+ [license-url]: https://github.com/grokify/gameofthrones/blob/master/LICENSE
 
 This is a set of data from Game of Thrones including characters and organizations.
 

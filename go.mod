@@ -7,7 +7,7 @@ require (
 	github.com/grokify/goauth v0.23.29
 	github.com/grokify/gocharts/v2 v2.27.0
 	github.com/grokify/gophonenumbers v0.6.2
-	github.com/grokify/mogo v0.74.1
+	github.com/grokify/mogo v0.74.2
 	github.com/spf13/cobra v1.10.2
 	github.com/ttacon/libphonenumber v1.2.1
 )

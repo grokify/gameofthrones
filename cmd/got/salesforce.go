@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grokify/gameofthrones"
+	"github.com/grokify/gameofthrones/augmented"
 	"github.com/grokify/go-salesforce/sobjects"
 	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/salesforce"
@@ -67,7 +67,7 @@ var sfCreateContactsCmd = &cobra.Command{
 			return err
 		}
 
-		chars, err := gameofthrones.GetDemoCharacters()
+		chars, err := augmented.GetCharacters()
 		if err != nil {
 			return err
 		}
@@ -169,7 +169,7 @@ func newSalesforceClient() (salesforce.SalesforceClient, error) {
 
 func getSalesforceAccounts() (sfCreateAccountsRequest, error) {
 	recs := sfCreateAccountsRequest{Records: []sfAccount{}}
-	orgs, err := gameofthrones.GetDemoOrganizations()
+	orgs, err := augmented.GetOrganizations()
 	if err != nil {
 		return recs, err
 	}
@@ -215,16 +215,16 @@ func getSfAccounts(sc salesforce.SalesforceClient) sfAccounts {
 	return sfActs
 }
 
-func loadSalesforceCharacters(sc salesforce.SalesforceClient, chars []gameofthrones.Character, sfActs sfAccounts) error {
+func loadSalesforceCharacters(sc salesforce.SalesforceClient, chars []augmented.Character, sfActs sfAccounts) error {
 	for _, char := range chars {
 		contact := sfContact{
-			FirstName: char.Character.Name.GivenName,
-			LastName:  char.Character.Name.FamilyName,
-			Email:     char.Character.Emails[0].Value,
+			FirstName: char.Character.Character.Name.GivenName,
+			LastName:  char.Character.Character.Name.FamilyName,
+			Email:     char.Character.Character.Emails[0].Value,
 		}
 
-		if len(char.Character.PhoneNumbers) > 0 {
-			e164 := char.Character.PhoneNumbers[0].Value
+		if len(char.Character.Character.PhoneNumbers) > 0 {
+			e164 := char.Character.Character.PhoneNumbers[0].Value
 			num, err := libphonenumber.Parse(e164, "US")
 			if err != nil {
 				return err
@@ -232,8 +232,8 @@ func loadSalesforceCharacters(sc salesforce.SalesforceClient, chars []gameofthro
 			contact.Phone = libphonenumber.Format(num, libphonenumber.NATIONAL)
 		}
 
-		if len(char.Organization.Name) > 0 {
-			if actID, ok := sfActs.NameToIDMap[char.Organization.Name]; ok {
+		if len(char.Character.Organization.Name) > 0 {
+			if actID, ok := sfActs.NameToIDMap[char.Character.Organization.Name]; ok {
 				contact.AccountID = actID
 			}
 		}

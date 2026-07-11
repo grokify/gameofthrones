@@ -36,7 +36,10 @@
         { "description": "`augmented.GetCharactersByStation()` for grouping characters by rank", "commit": "725878a" },
         { "description": "`augmented.HighRiskResources()` and `CriticalResources()` filter functions", "commit": "725878a" }
       ],
-      "deprecated": [
+      "breaking": [
+        { "description": "Removed `characters_demo.go` and `organizations_demo.go` — use `augmented` package instead", "commit": "725878a" }
+      ],
+      "removed": [
         { "description": "`DemoCharacters` type — use `augmented.Characters` instead", "commit": "725878a" },
         { "description": "`GetDemoCharacters()` — use `augmented.GetCharacters()` instead", "commit": "725878a" },
         { "description": "`DemoOrganization` type — use `augmented.Organization` instead", "commit": "725878a" },

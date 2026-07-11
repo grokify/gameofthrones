@@ -18,6 +18,11 @@ const (
 	phoneNumberStart = 100
 )
 
+// Deprecated: DemoOrganization is deprecated. Use the augmented package instead:
+//
+//	import "github.com/grokify/gameofthrones/augmented"
+//	orgs, err := augmented.GetOrganizations()
+//
 // DemoOrganization represents a Game of Thrones organization with demo contact data.
 type DemoOrganization struct {
 	Name     string
@@ -34,11 +39,17 @@ func (oa *DemoOrganization) E164() string {
 	return ""
 }
 
+// Deprecated: DemoOrganizations is deprecated. Use the augmented package instead.
 // DemoOrganizations holds a map of organization names to their demo data.
 type DemoOrganizations struct {
 	OrganizationsMap map[string]DemoOrganization
 }
 
+// Deprecated: GetDemoOrganizations is deprecated. Use the augmented package instead:
+//
+//	import "github.com/grokify/gameofthrones/augmented"
+//	orgs, err := augmented.GetOrganizations()
+//
 // GetDemoOrganizations returns all organizations with generated demo data including
 // area codes, phone numbers, and domain names.
 func GetDemoOrganizations() (DemoOrganizations, error) {

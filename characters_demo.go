@@ -16,6 +16,11 @@ const (
 	defaultFallbackDomain = "westeros.com"
 )
 
+// Deprecated: DemoCharacters is deprecated. Use the augmented package instead:
+//
+//	import "github.com/grokify/gameofthrones/augmented"
+//	chars, err := augmented.GetCharacters()
+//
 // DemoCharacters holds a map of character display names to their full Character data.
 type DemoCharacters struct {
 	CharactersMap map[string]Character
@@ -50,6 +55,11 @@ func (dc *DemoCharacters) CharactersSorted() []Character {
 	return chars
 }
 
+// Deprecated: GetDemoCharacters is deprecated. Use the augmented package instead:
+//
+//	import "github.com/grokify/gameofthrones/augmented"
+//	chars, err := augmented.GetCharacters()
+//
 // GetDemoCharacters returns all characters with generated demo data including
 // email addresses and phone numbers based on their organization affiliations.
 func GetDemoCharacters() (DemoCharacters, error) {

@@ -7,6 +7,55 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.6.0",
+      "date": "2026-07-11",
+      "highlights": [
+        { "description": "Period-appropriate terminology for character data (Station, Orders, Allegiance)" },
+        { "description": "New `augmented/` subpackage for modern demo data (email, phone, risk levels)" }
+      ],
+      "added": [
+        { "description": "`Station` type with social rank hierarchy (Smallfolk, Knight, Lord, Great Lord, Royal)", "commit": "725878a" },
+        { "description": "`LifeStatus` type for character status (Living, Deceased) based on series finale", "commit": "725878a" },
+        { "description": "`Title` type with categories (Governance, Military, Religious, Academic, Commerce)", "commit": "725878a" },
+        { "description": "`Orders` slice for formal organizations (Night's Watch, Kingsguard, Small Council, etc.)", "commit": "725878a" },
+        { "description": "`Allegiance` type for feudal relationships (Liege, SwornTo)", "commit": "725878a" },
+        { "description": "`Resource` type for organization assets by category", "commit": "725878a" },
+        { "description": "`CharacterStation` map linking characters to their social rank", "commit": "725878a" },
+        { "description": "`CharacterStatus` map linking characters to living/deceased status", "commit": "725878a" },
+        { "description": "`CharacterTitles` map linking characters to their formal titles", "commit": "725878a" },
+        { "description": "`CharacterOrders` map linking characters to order memberships", "commit": "725878a" },
+        { "description": "`CharacterAllegiance` map linking characters to feudal relationships", "commit": "725878a" },
+        { "description": "`OrganizationResources` map linking organizations to their assets", "commit": "725878a" },
+        { "description": "`augmented.Character` type embedding base character with Email and Phone fields", "commit": "725878a" },
+        { "description": "`augmented.Resource` type embedding base resource with RiskLevel (1-5 scale)", "commit": "725878a" },
+        { "description": "`augmented.Organization` type with AreaCode, Phone, and Domain fields", "commit": "725878a" },
+        { "description": "`augmented.GetCharacters()` returning characters with demo contact info", "commit": "725878a" },
+        { "description": "`augmented.GetOrganizations()` returning organizations with demo contact info", "commit": "725878a" },
+        { "description": "`augmented.GetAugmentedResources()` returning resources with risk levels", "commit": "725878a" },
+        { "description": "`augmented.GetCharactersByOrganization()` for grouping characters", "commit": "725878a" },
+        { "description": "`augmented.GetCharactersByStation()` for grouping characters by rank", "commit": "725878a" },
+        { "description": "`augmented.HighRiskResources()` and `CriticalResources()` filter functions", "commit": "725878a" }
+      ],
+      "deprecated": [
+        { "description": "`DemoCharacters` type — use `augmented.Characters` instead", "commit": "725878a" },
+        { "description": "`GetDemoCharacters()` — use `augmented.GetCharacters()` instead", "commit": "725878a" },
+        { "description": "`DemoOrganization` type — use `augmented.Organization` instead", "commit": "725878a" },
+        { "description": "`DemoOrganizations` type — use `augmented.Organizations` instead", "commit": "725878a" },
+        { "description": "`GetDemoOrganizations()` — use `augmented.GetOrganizations()` instead", "commit": "725878a" }
+      ],
+      "tests": [
+        { "description": "`TestStations`: verify station constants and character mappings", "commit": "725878a" },
+        { "description": "`TestCharacterStatus`: verify life status mappings", "commit": "725878a" },
+        { "description": "`TestCharacterTitles`: verify title structure and categories", "commit": "725878a" },
+        { "description": "`TestOrders`: verify orders list and character memberships", "commit": "725878a" },
+        { "description": "`TestCharacterAllegiance`: verify feudal hierarchy", "commit": "725878a" },
+        { "description": "`TestOrganizationResources`: verify resource categories", "commit": "725878a" },
+        { "description": "`TestGetCharacters`: verify augmented character generation", "commit": "725878a" },
+        { "description": "`TestGetOrganizations`: verify augmented organization generation", "commit": "725878a" },
+        { "description": "`TestResourceRiskLevels`: verify risk level mappings", "commit": "725878a" }
+      ]
+    },
+    {
       "version": "v0.5.0",
       "date": "2026-04-19",
       "highlights": [

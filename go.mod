@@ -5,9 +5,9 @@ go 1.26.0
 require (
 	github.com/grokify/go-salesforce v0.2.80
 	github.com/grokify/goauth v0.23.30
-	github.com/grokify/gocharts/v2 v2.27.0
+	github.com/grokify/gocharts/v2 v2.27.1
 	github.com/grokify/gophonenumbers v0.6.2
-	github.com/grokify/mogo v0.74.6
+	github.com/grokify/mogo v0.74.7
 	github.com/spf13/cobra v1.10.2
 	github.com/ttacon/libphonenumber v1.2.1
 )
@@ -40,14 +40,14 @@ require (
 	github.com/kylelemons/go-gypsy v1.0.0 // indirect
 	github.com/lib/pq v1.12.3 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
-	github.com/mattn/go-isatty v0.0.22 // indirect
-	github.com/mattn/go-runewidth v0.0.24 // indirect
+	github.com/mattn/go-isatty v0.0.24 // indirect
+	github.com/mattn/go-runewidth v0.0.28 // indirect
 	github.com/nyaruka/phonenumbers v1.8.0 // indirect
 	github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6 // indirect
 	github.com/olekukonko/errors v1.3.0 // indirect
 	github.com/olekukonko/ll v0.1.8 // indirect
 	github.com/olekukonko/tablewriter v1.1.4 // indirect
-	github.com/richardlehane/mscfb v1.0.7 // indirect
+	github.com/richardlehane/mscfb v1.0.8 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tiendc/go-deepcopy v1.7.2 // indirect
@@ -63,13 +63,13 @@ require (
 	go.opentelemetry.io/otel v1.44.0 // indirect
 	go.opentelemetry.io/otel/metric v1.44.0 // indirect
 	go.opentelemetry.io/otel/trace v1.44.0 // indirect
-	golang.org/x/crypto v0.54.0 // indirect
-	golang.org/x/exp v0.0.0-20260709172345-9ea1abe57597 // indirect
-	golang.org/x/image v0.44.0 // indirect
-	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/exp v0.0.0-20260820142414-ca536658362e // indirect
+	golang.org/x/image v0.45.0 // indirect
+	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/api v0.288.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260706201446-f0a921348800 // indirect
 	google.golang.org/grpc v1.82.0 // indirect
